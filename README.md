@@ -1,9 +1,9 @@
-# TaskManager-client
+# activity-monitor-client
 
 <!-- badges -->
 [![ISC license](https://img.shields.io/badge/License-ISC-blue.svg)](https://www.isc.org/licenses/)
-[![GitHub latest commit](https://img.shields.io/github/last-commit/Ultra-Instinct-js/TaskManager-client.svg)](https://github.com/Ultra-Instinct-js/TaskManager-client/commit/)
-[![GitHub forks](https://img.shields.io/github/forks/Ultra-Instinct-js/TaskManager-client.svg)](https://github.com/Ultra-Instinct-js/TaskManager-client)
+[![GitHub latest commit](https://img.shields.io/github/last-commit/Ultra-Instinct-js/activity-monitor-client.svg)](https://github.com/Ultra-Instinct-js/activity-monitor-client/commit/)
+[![GitHub forks](https://img.shields.io/github/forks/Ultra-Instinct-js/activity-monitor-client.svg)](https://github.com/Ultra-Instinct-js/activity-monitor-client)
 
 ## Installation & Usage
 
