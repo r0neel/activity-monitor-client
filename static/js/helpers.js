@@ -18,6 +18,7 @@ function showHabitInfo(habitData){
     const newInfo = renderHabitInfo(habitData);
     const info = document.querySelector("#habit-info");
     info.replaceWith(newInfo);
+    return newInfo;
 }
 
 function showLoginForm(){
