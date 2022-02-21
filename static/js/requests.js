@@ -8,7 +8,7 @@ function login({username, password}){
             };
             const response = await fetch(`${API_HOST}/login`, options);
             const json = await response.json();
-            if(!json.success) throw new Error(json);
+            if(!json.status !== 200) throw new Error(json);
             resolve(json);
         } catch (err) {
             reject(err);
