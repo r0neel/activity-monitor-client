@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "http-server",
-    "dev": "concurrently \"watchify ./static/js/main.js -o bundle.js -v\" \"http-server\"",
+    "dev": "concurrently \"watchify ./static/js/index.js -o bundle.js -v\" \"http-server\"",
     "test": "jest --watchAll",
     "coverage": "jest --coverage",
-    "bundle": "browserify ./static/js/main.js -o bundle.js"
+    "bundle": "browserify ./static/js/index.js -o bundle.js"
   },
   "keywords": [],
   "author": "",
