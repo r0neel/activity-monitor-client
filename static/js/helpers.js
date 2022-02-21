@@ -14,8 +14,8 @@ function showHabits(habitData){
     return newHabitList;
 }
 
-function showHabitInfo(hid){
-    const newInfo = renderHabitInfo(hid);
+function showHabitInfo(habitData){
+    const newInfo = renderHabitInfo(habitData);
     const info = document.querySelector("#habit-info");
     info.replaceWith(newInfo);
 }

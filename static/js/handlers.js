@@ -1,6 +1,8 @@
 const { login, register, getHabits, updateHabit, newHabit, deleteHabit } = require("./requests");
 const { showLoginForm, showRegisterForm, showHabits, showHome, updateNavigation, decodeToken, navLinkEvent, showNewHabitForm, showHabitInfo } = require("./helpers");
 
+let habitsData = [];
+
 async function loginSubmitHandler(e){
     e.preventDefault();
     try {
@@ -50,7 +52,7 @@ async function navLinkHandler(e){
             if(localStorage.getItem("token")){
                 const { uid } = decodeToken();
                 try {
-                    const habitData = await getHabits(uid);
+                    habitsData = await getHabits(uid);
                     showHabits(habitData);
                 } catch (err) {
                     localStorage.removeItem("token");
@@ -75,8 +77,8 @@ async function navLinkHandler(e){
 
 function habitClickHandler(e){
     const hid = e.target.dataset.hid;
-    // to-do: get habit info and pass as data
-    showHabitInfo(e.target.dataset.hid);
+    const habitData = habitsData.find(habit => habit.id === hid);
+    showHabitInfo(habitData);
 }
 
 function newHabitClickHandler(e){
@@ -90,8 +92,11 @@ async function habitUpdateHandler(e){
         const { uid } = decodeToken();
         const hid = e.target.dataset.hid;
         const formData = new FormData(e.target);
-        const { amount } = await updateHabit(uid, hid, Object.fromEntries(formData));
-        // to-do: update habit info then trigger click event on habit
+        const updatedHabit = await updateHabit(uid, hid, Object.fromEntries(formData));
+        
+        let habitData = habitsData.find(habit => habit.id === hid);
+        habitData.history = updatedHabit.history;
+        e.target.click(); // to-do: select habit list item
     } catch (err) {
         // can't update habit progress
         console.warn(err);
