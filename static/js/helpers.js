@@ -80,7 +80,7 @@ function navLinkEvent(page){
     }
 }
 
-testingExports = {
+const testingExports = {
     showForm, isLoggedIn
 };
 
