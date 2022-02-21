@@ -1,0 +1,21 @@
+body{
+    background-color: white;
+}
+
+main{
+    height: 300px;
+}
+
+article{
+    height: 400px;
+    background-color: #6c757d;
+}
+
+#newTrackerCard {
+    margin: 150px;
+    padding: 10px;
+}
+
+.btn-success{
+    padding: 10px;
+}
