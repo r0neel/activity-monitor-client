@@ -38,6 +38,68 @@ describe("Helper functions (updating the DOM)", () => {
         });
     });
 
+    describe("showHabits", () => {
+        render.renderHabitList.mockImplementation(() => {
+            const newList = document.createElement("div");
+            newList.id = "list-new";
+            return newList;
+        });
+
+        beforeEach(() => {
+            document.documentElement.innerHTML = "<div id='habit-list'></div>";
+        });
+
+        it("calls render.renderHabitList with habit data", () => {
+            const mockData = {foo: "bar"};
+            helpers.showHabits(mockData);
+            expect(render.renderHabitList).toBeCalledWith(mockData);
+        });
+
+        it("replaces habit list with rendered element", () => {
+            helpers.showHabits();
+            const newList = document.querySelector("div");
+            const expectedElement = render.renderHabitList();
+            expect(newList).toEqual(expectedElement);
+        });
+
+        it("returns rendered element", () => {
+            const newList = helpers.showHabits();
+            const expectedElement = render.renderHabitList();
+            expect(newList).toEqual(expectedElement);
+        });
+    });
+
+    describe("showHabitInfo", () => {
+        render.renderHabitInfo.mockImplementation(() => {
+            const newInfo = document.createElement("div");
+            newInfo.id = "info-new";
+            return newInfo;
+        });
+
+        beforeEach(() => {
+            document.documentElement.innerHTML = "<div id='habit-info'></div>";
+        });
+
+        it("calls render.renderHabitInfo with habit data", () => {
+            const mockData = {foo: "bar"};
+            helpers.showHabitInfo(mockData);
+            expect(render.renderHabitInfo).toBeCalledWith(mockData);
+        });
+
+        it("replaces habit info with rendered element", () => {
+            helpers.showHabitInfo();
+            const newList = document.querySelector("div");
+            const expectedElement = render.renderHabitInfo();
+            expect(newList).toEqual(expectedElement);
+        });
+
+        it("returns rendered element", () => {
+            const newList = helpers.showHabitInfo();
+            const expectedElement = render.renderHabitInfo();
+            expect(newList).toEqual(expectedElement);
+        });
+    });
+
     describe("showForm functions", () => {
         const mockRender = () => {
             let newContent = document.createElement("form");
