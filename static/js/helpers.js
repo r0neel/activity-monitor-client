@@ -66,11 +66,7 @@ function isLoggedIn(){
 
 function decodeToken(){
     const token = localStorage.getItem("token");
-    try {
-        return jwt_decode(token);
-    } catch (err) {
-        return {};
-    }
+    return jwt_decode(token);
 }
 
 function navLinkEvent(page){
