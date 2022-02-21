@@ -12,6 +12,38 @@
     <script defer src='static/js/index.js'></script>
 </head>
 <body>
+    <!-- LOGIN MODAL-->
+    <div id="about" class="modal fade" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h3>About</h3>
+            </div>
+            <div class="modal-body">
+                <!-- Info box -->
+                <section id="info-box">
+                    <h5 id="info-modal-heading1">What is this site?</h5>
+                    <p class="px-3 pb-2 mb-3" id="info-modal-para1">
+                        This platform is primarily for coders to anonymously share their experiences with other coders around the world. <br/>
+                        We hope to provide a place for coders to just relax and know that they're not alone with their bugs.
+                    </p>
+                    <h5 id="info-modal-heading2">What can I share?</h5>
+                    <p class="px-3 pb-2 mb-3" id="info-modal-para2">
+                        You can ask questions, share tips or just talk about something relatable that happened to you or someone you know. Feel free to decorate your posts with a GIF!
+                    </p>
+                    <h5 id="info-modal-heading3">Who made this site?</h5>
+                    <p class="px-3 pb-2 mb-1" id="info-modal-para3">
+                        This was a collaborative group project as part of lap 1 of the training course at <a href="https://www.getfutureproof.co.uk/" target="_blank">Futureproof</a>. The project was developed in the span of 1 week from planning to execution to debugging.
+                    </p>
+                </section>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+    </div>
+      
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
         <div class="container">
@@ -30,10 +62,9 @@
                         <li class="nav-item"><a class="nav-link" href="https://github.com/Ultra-Instinct-js/activity-monitor-server" target="_blank">Server</a></li>
                     </ul>
                   </li>
-                <li class="nav-item"><a class="nav-link" href="loginPage" data-bs-target="#loginPage">Signout</a></li>
-            </ul>
-
-            
+                <li class="nav-item"><a class="nav-link" href="loginPage" data-bs-target="#loginPage">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="signout" data-bs-target="#signout">Signout</a></li>
+            </ul> 
           </div>
         </div>
       </nav>
@@ -63,7 +94,7 @@
     </Main>
     <!-- MAKING NEW TRACKED HABIT/SHOWS CURRENTLY SELECTED HABIT-->
     <article>
-        <div class="card justify-content-center " id="newTrackerCard">
+        <div class="card justify-content-center " id="trackerCard">
             <div class="card-body justify-content-center p-6">
                 <div>
                     <form action="">
