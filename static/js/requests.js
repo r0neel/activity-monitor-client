@@ -1,14 +1,14 @@
-function login({username, password}){
+function login({email, password}){
     return new Promise(async (resolve, reject) => {
         try {
             const options = {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ username, password })
+                body: JSON.stringify({ email, password })
             };
             const response = await fetch(`${API_HOST}/auth/login`, options);
             const json = await response.json();
-            if(!json.status !== 200) throw new Error(json);
+            if(!json.success) throw new Error(json.error);
             resolve(json);
         } catch (err) {
             reject(err);
@@ -26,7 +26,7 @@ function register({username, email, password}){
             };
             const response = await fetch(`${API_HOST}/auth/register`, options);
             const json = await response.json();
-            if(!json.success) throw new Error(json);
+            if(response.status !== 201) throw new Error(json.error);
             resolve(json);
         } catch (err) {
             reject(err);
