@@ -80,3 +80,15 @@ nav {
     right: 26px;
     top: 16px;
 }
+
+#update-prog-input {
+    border: none;
+    padding: 3px;
+    padding-right: 5px;
+    width: 0;
+    text-align: right;
+}
+
+#update-prog-input:focus {
+    outline: 1px solid #ccc;
+}
