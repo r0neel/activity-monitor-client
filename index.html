@@ -13,28 +13,28 @@
 </head>
 <body>
     <!-- LOGIN MODAL-->
-    <div id="about" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div id="loginPage" class="modal fade" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
             <div class="modal-header">
-                <h3>About</h3>
+                <h3>Login</h3>
             </div>
             <div class="modal-body">
-                <!-- Info box -->
-                <section id="info-box">
-                    <h5 id="info-modal-heading1">What is this site?</h5>
-                    <p class="px-3 pb-2 mb-3" id="info-modal-para1">
-                        This platform is primarily for coders to anonymously share their experiences with other coders around the world. <br/>
-                        We hope to provide a place for coders to just relax and know that they're not alone with their bugs.
-                    </p>
-                    <h5 id="info-modal-heading2">What can I share?</h5>
-                    <p class="px-3 pb-2 mb-3" id="info-modal-para2">
-                        You can ask questions, share tips or just talk about something relatable that happened to you or someone you know. Feel free to decorate your posts with a GIF!
-                    </p>
-                    <h5 id="info-modal-heading3">Who made this site?</h5>
-                    <p class="px-3 pb-2 mb-1" id="info-modal-para3">
-                        This was a collaborative group project as part of lap 1 of the training course at <a href="https://www.getfutureproof.co.uk/" target="_blank">Futureproof</a>. The project was developed in the span of 1 week from planning to execution to debugging.
-                    </p>
+                <!-- INFO BOX OF LOGIN -->
+                <section id="loginInfoBox">
+                    <form action="">
+                        <div>
+                            <label for="usernameLogin" class="form-label">Username:</label>
+                            <input type="text" id="usernameLogin">
+                        </div>
+                        <div>
+                            <label for="passwordLogin" class="form-label">Password:</label>
+                            <input type="password" id="passwordLogin">
+                        </div>
+                        <div>
+                            <button class="btn btn-dark" data-bs-toggle="button">Login</button>
+                        </div>
+                    </form>
                 </section>
             </div>
             <div class="modal-footer">
@@ -43,6 +43,46 @@
             </div>
         </div>
     </div>
+
+        <!-- REGISTER MODAL-->
+        <div id="registerPage" class="modal fade" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Register</h3>
+                </div>
+                <div class="modal-body">
+                    <!-- INFO BOX OF REGISTER -->
+                    <section id="loginInfoBox">
+                        <form action="">
+                            <div>
+                                <label for="usernameRegister" class="form-label">Username:</label>
+                                <input type="text" id="usernameRegister">
+                            </div>
+                            <div>
+                                <label for="passwordRegister" class="form-label">Password:</label>
+                                <input type="password" id="passwordRegister">
+                            </div>
+                            <div>
+                                <label for="emailRegister" class="form-label">Email:</label>
+                                <input type="email" id="emailRegister">
+                            </div>
+                            <div>
+                                <label for="confirmEmailRegister" class="form-label">Confirm Email:</label>
+                                <input type="email" id="confirmEmailRegister">
+                            </div>
+                            <div>
+                                <button class="btn btn-dark" data-bs-toggle="button">Register</button>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
       
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
@@ -53,7 +93,7 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item dropdown">
+                <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Github
                     </a>
@@ -61,79 +101,82 @@
                         <li class="nav-item"><a class="nav-link" href="https://github.com/Ultra-Instinct-js/activity-monitor-client" target="_blank">Client</a></li>
                         <li class="nav-item"><a class="nav-link" href="https://github.com/Ultra-Instinct-js/activity-monitor-server" target="_blank">Server</a></li>
                     </ul>
-                  </li>
-                <li class="nav-item"><a class="nav-link" href="loginPage" data-bs-target="#loginPage">Login</a></li>
+                  </li> -->
+                <li class="nav-item"><a class="nav-link" href="registerPage" data-bs-target="#registerPage" data-bs-toggle="modal">Register</a></li> 
+                <li class="nav-item"><a class="nav-link" href="loginPage" data-bs-target="#loginPage" data-bs-toggle="modal">Login</a></li>
                 <li class="nav-item"><a class="nav-link" href="signout" data-bs-target="#signout">Signout</a></li>
             </ul> 
           </div>
         </div>
       </nav>
-      <!-- LIST OF ALL ACTIVITIES TRACKED-->
-    <Main>
-        <div class="card justify-content-center " id="trackerListCard">
-            <div class="card-body justify-content-center p-6">
-                <div>
-                    <ul>
-                        <li class="">Habit</li>
-                        <li class="">Track</li>
-                        <li class="">Goal</li>
-                        <li class="">Count</li>
-                    </ul>
+      <Main>
+        <!-- LIST OF ALL ACTIVITIES TRACKED-->
+        <section>
+            <div class="card justify-content-center " id="trackerListCard">
+                <div class="card-body justify-content-center p-6">
+                    <div class="container">
+                        <ul style="list-style: none;" class="">
+                            <li class="">Habit</li>
+                            <li class="">Track</li>
+                            <li class="">Goal</li>
+                            <li class="">Count</li>
+                        </ul>
+                    </div>
+                    <div class="container">
+                        <ul style="list-style: none;">
+                            <li class=""><a class="nav-link" href="moreInfoCard" data-bs-target="moreInfoCard">Practice Japanese</a></li>
+                            <li class=""><a class="nav-link" href="moreInfoCard" data-bs-target="moreInfoCard">60 minutes</a></li>
+                            <li class=""><a class="nav-link" href="moreInfoCard" data-bs-target="moreInfoCard">120 minutes</a></li>
+                            <li class=""><a class="nav-link" href="moreInfoCard" data-bs-target="moreInfoCard">PERCENTAGE BAR HERE</a></li>
+                        </ul>
+                    </div>
+    
                 </div>
-                <div>
-                    <ul>
-                        <li class=""><a class="nav-link" href="moreInfoCard" data-bs-target="moreInfoCard">Practice Japanese</a></li>
-                        <li class=""><a class="nav-link" href="moreInfoCard" data-bs-target="moreInfoCard">60 minutes</a></li>
-                        <li class=""><a class="nav-link" href="moreInfoCard" data-bs-target="moreInfoCard">120 minutes</a></li>
-                        <li class=""><a class="nav-link" href="moreInfoCard" data-bs-target="moreInfoCard">PERCENTAGE BAR HERE</a></li>
-                    </ul>
-                </div>
-
             </div>
-        </div>
-    </Main>
-    <!-- MAKING NEW TRACKED HABIT/SHOWS CURRENTLY SELECTED HABIT-->
-    <article>
-        <div class="card justify-content-center " id="trackerCard">
-            <div class="card-body justify-content-center p-6">
-                <div>
-                    <form action="">
-                        <label for="habit" class="form-label">Habit</label>
-                        <input type="text" name="habit" id="habit" placeholder="Insert the name of the habit you wish to track" class="form-control">
+        </section>
+            <!-- MAKING NEW TRACKED HABIT/SHOWS CURRENTLY SELECTED HABIT-->
+        <article>
+            <div class="card justify-content-center " id="trackerCard">
+                <div class="card-body justify-content-center p-6">
+                    <div>
+                        <form action="">
+                            <label for="habit" class="form-label">Habit</label>
+                            <input type="text" name="habit" id="habit" placeholder="Insert the name of the habit you wish to track" class="form-control">
 
-                        <label for="goal" class="form-label">Goal</label>
-                        <input type="number" name="goal" id="goal" placeholder="how much/many do you wish to complete" class="form-control">
+                            <label for="goal" class="form-label">Goal</label>
+                            <input type="number" name="goal" id="goal" placeholder="how much/many do you wish to complete" class="form-control">
 
-                        <label for="unit" class="form-label">Unit of goal</label>
-                        <select name="unit" id="unit" class="form-select">
-                            <option value="times">Times</option>
-                            <option value="hours">Hours</option>
-                            <option value="days">Days</option>
-                            <option value="weeks">Weeks</option>
-                            <option value="months">Months</option>
-                            <option value="years">Years</option>
-                            <option value="metres">Metres</option>
-                            <option value="kilometres">Kilometres</option>
-                            <option value="miles">Miles</option>
-                            <option value="ounces">Ounces</option>
-                            <option value="Cups">Cups</option>
-                            <option value="millilitres">Millilitres</option>
-                            <option value="Litres">Litres</option>
-                            <option value="pounds">Pounds</option>
-                            <option value="stones">Stones</option>
-                            <option value="kilograms">Kilograms</option>
-                    </select>
+                            <label for="unit" class="form-label">Unit of goal</label>
+                            <select name="unit" id="unit" class="form-select">
+                                <option value="times">Times</option>
+                                <option value="hours">Hours</option>
+                                <option value="days">Days</option>
+                                <option value="weeks">Weeks</option>
+                                <option value="months">Months</option>
+                                <option value="years">Years</option>
+                                <option value="metres">Metres</option>
+                                <option value="kilometres">Kilometres</option>
+                                <option value="miles">Miles</option>
+                                <option value="ounces">Ounces</option>
+                                <option value="Cups">Cups</option>
+                                <option value="millilitres">Millilitres</option>
+                                <option value="Litres">Litres</option>
+                                <option value="pounds">Pounds</option>
+                                <option value="stones">Stones</option>
+                                <option value="kilograms">Kilograms</option>
+                        </select>
 
-                    <button class="btn btn-success" data-bs-toggle="button">Add tracker</button>
-                        
-                    </form>
+                        <button class="btn btn-success" data-bs-toggle="button">Add tracker</button>
+                            
+                        </form>
+                    </div>
+
                 </div>
-
             </div>
-        </div>
-    </article>
+        </article>
 
-    <!-- FOOTER -->
+
+            <!-- FOOTER -->
     <footer class=" page-footer py-4 navbar-light bg-secondary text-muted">
         <div class="container">
             <p class="m-0 text-center text-white">
@@ -142,5 +185,6 @@
             </p>
         </div>
     </footer>
+    </Main>
 </body>
 </html>
