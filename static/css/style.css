@@ -1,5 +1,6 @@
 body{
     background-color: white;
+    font-family: 'Inter', sans-serif;
 }
 
 main{
@@ -19,3 +20,16 @@ article{
 .btn-success{
     padding: 10px;
 }
+
+td{
+    cursor: pointer;
+}
+
+th {
+    font-weight: normal;
+}
+
+.table > :not(:first-child) {
+    border-top: 1px solid currentcolor;
+}
+
