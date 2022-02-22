@@ -10,8 +10,15 @@ function pageLoadHandler(){
 async function loginSubmitHandler(e){
     e.preventDefault();
     try {
-        const formData = new FormData(e.target);
-        const response = await login(Object.fromEntries(formData));
+        const formData = Object.fromEntries(new FormData(e.target));
+
+        for(let key in formData){
+            if(formData[key] === ""){
+                throw new Error("Required fields missing.");
+            }
+        }
+        
+        const response = await login(formData);
         localStorage.setItem("token", response.token.slice(7));
         navLinkHandler(navLinkEvent("home"));
     } catch (err) {
@@ -23,8 +30,19 @@ async function loginSubmitHandler(e){
 async function registerSubmitHandler(e){
     e.preventDefault();
     try {
-        const formData = new FormData(e.target);
-        const response = await register(Object.fromEntries(formData));
+        const formData = Object.fromEntries(new FormData(e.target));
+
+        for(let key in formData){
+            if(formData[key] === ""){
+                throw new Error("Required fields missing.");
+            }
+        }
+
+        if(formData.password !== formData.passwordConfirm){
+            throw new Error("Passwords don't match.");
+        }
+
+        const response = await register(formData);
         if(response === "User created"){
             loginSubmitHandler(e);
         } else throw new Error(response);
