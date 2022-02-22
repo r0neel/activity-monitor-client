@@ -103,3 +103,8 @@ nav {
 .modal-content {
     border-radius: 2.3rem;
 }
+
+#trackYourHabits {
+    font-size: 60px;
+    font-weight: 700;
+}
