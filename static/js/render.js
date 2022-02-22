@@ -1,5 +1,39 @@
 function renderHome(){
+    const content = document.createElement("main");
+    content.id = "content";
 
+    const heading = document.createElement("h1");
+    heading.classList.add("text-center", "pt-5");
+    heading.id = "trackYourHabits";
+    heading.innerHTML = "TRACK YOUR <br> HABITS!";
+
+    const headingContainer = document.createElement("div");
+    headingContainer.appendChild(heading);
+    content.appendChild(headingContainer);
+
+    [
+        ["What is Activity Monitor?", "Activitiy monitor is a webpage that allows anyone to track their personal habits. <br>We hope that Activity Monitor can aid in helping users remain accountable for habits <br>and to promote a positive lifestyle and reach their goals."],
+        ["What am I able to track?", "Anything! Activity Monitor is designed for users to track whatever they wish <br>to track, being to studying a Japanese 1 hour a day, to wanting to lose 20 pounds <br> over 5 months. We have predefined units and timescales so you can spend less time <br> planning and more time completing your goals!."],
+        ["Who made Activity Monitor?", "Activity Monitor was designed, created and deployed as a collaborative group project <br> as part of lap 2 of the training course of futureproof. The project occured over the <br> the span of 1 week and was created by team Ultra-Instinct."]
+    ].forEach(text => {
+        const container = document.createElement("div");
+
+        const heading = document.createElement("h3");
+        heading.classList.add("text-center", "pt-5");
+        heading.innerHTML = text[0];
+        container.appendChild(heading);
+
+        const pContainer = document.createElement("div");
+        const p = document.createElement("p");
+        p.classList.add("text-center");
+        p.innerHTML = text[1];
+        pContainer.appendChild(p);
+        container.appendChild(pContainer);
+
+        content.appendChild(container);
+    });
+
+    return content;
 }
 
 function renderLoginForm(){
@@ -145,12 +179,189 @@ function renderNewHabitForm(){
     habitInput.classList.add("form-control");
 }
 
-function renderHabitList(){
+// render list of habits with details
+function renderHabitList(habitData){
+    const container = document.createElement("section");
+    container.id = "habit-list";
 
+    // table
+    const table = document.createElement("table");
+    table.classList.add("table", "table-striped");
+    container.appendChild(table);
+
+    const thead = document.createElement("thead");
+    table.appendChild(thead);
+
+    const tr = document.createElement("tr");
+    tr.classList.add("text-center");
+    thead.appendChild(tr);
+
+    // table headings
+    [
+        "Habit", 
+        "Progress", 
+        "Goal", 
+        "Progression"
+    ].forEach(text => {
+        const th = document.createElement("th");
+        th.textContent = text;
+        tr.appendChild(th);
+    });
+
+    const tbody = document.createElement("tbody");
+    table.appendChild(tbody);
+
+    // table rows
+    habitData.forEach(data => {
+        // to do - calculate stats from habit data
+        let progress = 0;
+        let stringDuration = "days";
+        let progression = (progress / data.goal) * 100;
+
+        const row = document.createElement("tr");
+
+        // first three columns
+        [
+            data.habit, // habit name
+            `${progress} ${data.unit}`, // progress
+            `${data.goal} ${data.unit}/${stringDuration}` // goal
+        ].forEach((text, i) => {
+            const col = document.createElement("td");
+
+            if(i === 0) {
+                col.classList.add("text-start");
+            } else {
+                col.classList.add("text-end");
+            }
+
+            col.textContent = text;
+            row.appendChild(col);
+        });
+
+        // progress bar column
+        const progCol = document.createElement("td");
+        progCol.classList.add("align-middle");
+        row.appendChild(progCol);
+
+        const progContainer = document.createElement("div");
+        progContainer.classList.add("progress");
+        progCol.appendChild(progContainer);
+
+        const progBar = document.createElement("div");
+        progBar.classList.add("progress-bar");
+        progBar.role = "progressbar";
+        progBar.setAttribute("aria-valuenow", progression);
+        progBar.setAttribute("aria-valuemin", 0);
+        progBar.setAttribute("aria-valuemax", 100);
+        progBar.style.width = `${progression}%`;
+        progContainer.appendChild(progBar);
+
+        tbody.appendChild(row);
+    });
+
+    return container;
 }
 
-function renderHabitInfo(){
+// render stats for single habit
+function renderHabitInfo(habitData){
+    //to do - calculate stats from data
+    let progress = 0;
+    let stringDuration = "days";
+    let progression = (progress / data.goal) * 100;
+    let streak = 0;
 
+    const container = document.createElement("div");
+    container.classList.add("card-body");
+    container.innerHTML = "<h2>Stats</h2>"; // heading
+
+    // delete button
+    const delBtn = document.createElement("button");
+    delBtn.id = "delete-btn";
+    delBtn.classList("btn", "btn-danger");
+    delBtn.textContent = "Delete";
+    container.appendChild(delBtn);
+
+    // table
+    const table = document.createElement("table");
+    const tbody = document.createElement("tbody");
+    table.appendChild(tbody);
+    container.appendChild(table);
+
+    // habit name display row
+    const habitRow = document.createElement("tr");
+    const habitLabelCol = document.createElement("td");
+    habitLabelCol.textContent = "Habit";
+    habitRow.appendChild(habitLabelCol);
+    const habitCol = document.createElement("td");
+    habitCol.textContent = habitData.habit;
+    habitRow.appendChild(habitCol);
+    tbody.appendChild(habitRow);
+
+    // current progress display row + update form
+    const progressRow = document.createElement("tr");
+    const progressLabelCol = document.createElement("td");
+    progressLabelCol.textContent = "Progress";
+    progressRow.appendChild(progressLabelCol);
+    const progressCol = document.createElement("td");
+    progressCol.textContent = `${progress} ${habitData.unit}`;
+    progressRow.appendChild(progressCol);
+    const progressInput = document.createElement("input");
+    progressInput.id = "update-prog-input";
+    progressInput.type = "text";
+    progressInput.placeholder = "add progress";
+    progressCol.appendChild(progressInput);
+    const progressInputButton = document.createElement("button");
+    progressInputButton.classList.add("btn", "btn-dark", "btn-sm");
+    progressInputButton.textContent = "+";
+    progressCol.appendChild(progressInputButton);
+    tbody.appendChild(progressRow);
+
+    // goal display row
+    const goalRow = document.createElement("tr");
+    const goalLabelCol = document.createElement("td");
+    goalLabelCol.textContent = "Goal";
+    goalRow.appendChild(goalLabelCol);
+    const goalCol = document.createElement("td");
+    goalCol.textContent = `${habitData.goal} ${habitData.unit}/${stringDuration}`;
+    goalRow.appendChild(goalCol);
+    tbody.appendChild(goalRow);
+
+    // progress bar display row
+    const progbarRow = document.createElement("tr");
+    const progbarLabelCol = document.createElement("td");
+    progbarLabelCol.textContent = "Progression";
+    progbarRow.appendChild(progbarLabelCol);
+
+    const progCol = document.createElement("td");
+    progCol.classList.add("align-middle");
+    progbarRow.appendChild(progCol);
+
+    const progContainer = document.createElement("div");
+    progContainer.classList.add("progress");
+    progCol.appendChild(progContainer);
+
+    const progBar = document.createElement("div");
+    progBar.classList.add("progress-bar");
+    progBar.role = "progressbar";
+    progBar.setAttribute("aria-valuenow", progression);
+    progBar.setAttribute("aria-valuemin", 0);
+    progBar.setAttribute("aria-valuemax", 100);
+    progBar.style.width = `${progression}%`;
+    progContainer.appendChild(progBar);
+
+    tbody.appendChild(progbarRow);
+
+    // current streak display row
+    const streakRow = document.createElement("tr");
+    const streakLabelCol = document.createElement("td");
+    streakLabelCol.textContent = "Goal";
+    streakRow.appendChild(streakLabelCol);
+    const streakCol = document.createElement("td");
+    streakCol.textContent = `${streak} ${stringDuration}`;
+    streakRow.appendChild(streakCol);
+    tbody.appendChild(streakRow);
+
+    return container;
 }
 
 module.exports = {
