@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <title>Activity Tracker</title>
+    <link rel="shortcut icon" type="image/png" href="static/images/android-chrome-512x512.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous" defer></script>
+    <link href="static/css/style.css" rel="stylesheet">
+    <script defer src='static/js/index.js'></script>
+</head>
+<body>
+    <!-- LOGIN MODAL-->
+    <div id="loginPage" class="modal fade" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Login</h3>
+                    <div class="form-check form-switch">
+                        <span>Sign Up</span>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Log In</label>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <!-- INFO BOX OF LOGIN -->
+                    <section id="loginInfoBox">
+                        <form id="login-form" class="text-center">
+                            <div>
+                                <label for="usernameLogin" class="form-label">Username:</label>
+                                <input type="text" id="usernameLogin">
+                            </div>
+                            <div>
+                                <label for="passwordLogin" class="form-label">Password:</label>
+                                <input type="password" id="passwordLogin">
+                            </div>
+                            <div>
+                                <button class="btn btn-dark" data-bs-toggle="button">Login</button>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <a class="navbar-brand" href="index.html">Activity Tracker</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <!-- <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Github
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li class="nav-item"><a class="nav-link" href="https://github.com/Ultra-Instinct-js/activity-monitor-client" target="_blank">Client</a></li>
+                        <li class="nav-item"><a class="nav-link" href="https://github.com/Ultra-Instinct-js/activity-monitor-server" target="_blank">Server</a></li>
+                    </ul>
+                  </li> -->
+                <li class="nav-item"><a class="nav-link" href="registerPage" data-bs-target="#loginPage" data-bs-toggle="modal">Register</a></li> 
+                <li class="nav-item"><a class="nav-link" href="loginPage" data-bs-target="#loginPage" data-bs-toggle="modal">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="signout" data-bs-target="#signout">Signout</a></li>
+            </ul> 
+          </div>
+        </div>
+      </nav>
+      <main>
+    <!-- WELCOME INFORMATION -->
+        <div>
+            <h1 class="text-center pt-5" id="trackYourHabits">TRACK YOUR <br> HABITS!</h1>
+        </div>
+        <div>
+            <h3 class="text-center pt-5">What is Activity Monitor?</h3>
+            <div>
+                <p class="text-center">Activitiy monitor is a webpage that allows anyone to track their personal habits. <br>
+                                       We hope that Activity Monitor can aid in helping users remain accountable for habits <br>
+                                       and to promote a positive lifestyle and reach their goals.
+                </p>
+            </div>
+        </div>
+        <div>
+            <h3 class="text-center pt-5">What am I able to track?</h3>
+            <div>
+                <p class="text-center">Anything! Activity Monitor is designed for users to track whatever they wish <br>
+                                       to track, being to studying a Japanese 1 hour a day, to wanting to lose 20 pounds <br>
+                                        over 5 months. We have predefined units and timescales so you can spend less time <br>
+                                        planning and more time completing your goals!.
+                </p>
+            </div>
+        </div>
+        <div>
+            <h3 class="text-center pt-5">Who made Activity Monitor?</h3>
+            <div>
+                <p class="text-center">Activity Monitor was designed, created and deployed as a collaborative group project <br>
+                                       as part of lap 2 of the training course of futureproof. The project occured over the <br>
+                                       the span of 1 week and was created by team Ultra-Instinct.
+                </p>
+            </div>
+        </div>
+
+    </main>
+                <!-- FOOTER -->
+                <!-- <footer class=" page-footer py-4 navbar-light bg-secondary text-muted">
+                  <div class="container">
+                      <p class="m-0 text-center text-white">
+                          Published under the ISC License. <br/>
+                          Deployed with Netlify and Heroku. 
+                      </p>
+                  </div>
+              </footer> -->
+</body>
+</html>
