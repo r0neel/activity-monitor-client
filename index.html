@@ -19,76 +19,38 @@
     <div id="loginPage" class="modal fade" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
-            <div class="modal-header">
-                <h3>Login</h3>
-            </div>
-            <div class="modal-body">
-                <!-- INFO BOX OF LOGIN -->
-                <section id="loginInfoBox">
-                    <form action="">
-                        <div>
-                            <label for="usernameLogin" class="form-label">Username:</label>
-                            <input type="text" id="usernameLogin">
-                        </div>
-                        <div>
-                            <label for="passwordLogin" class="form-label">Password:</label>
-                            <input type="password" id="passwordLogin">
-                        </div>
-                        <div>
-                            <button class="btn btn-dark" data-bs-toggle="button">Login</button>
-                        </div>
-                    </form>
-                </section>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-            </div>
-        </div>
-    </div>
-
-        <!-- REGISTER MODAL-->
-        <div id="registerPage" class="modal fade" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content">
                 <div class="modal-header">
-                    <h3>Register</h3>
+                    <h3>Login</h3>
+                    <div class="form-check form-switch">
+                        <span>Sign Up</span>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Log In</label>
+                    </div>
                 </div>
                 <div class="modal-body">
-                    <!-- INFO BOX OF REGISTER -->
+                    <!-- INFO BOX OF LOGIN -->
                     <section id="loginInfoBox">
-                        <form action="">
+                        <form id="login-form" class="text-center">
                             <div>
-                                <label for="usernameRegister" class="form-label">Username:</label>
-                                <input type="text" id="usernameRegister">
+                                <label for="usernameLogin" class="form-label">Username:</label>
+                                <input type="text" id="usernameLogin">
                             </div>
                             <div>
-                                <label for="passwordRegister" class="form-label">Password:</label>
-                                <input type="password" id="passwordRegister">
+                                <label for="passwordLogin" class="form-label">Password:</label>
+                                <input type="password" id="passwordLogin">
                             </div>
                             <div>
-                                <label for="emailRegister" class="form-label">Email:</label>
-                                <input type="email" id="emailRegister">
-                            </div>
-                            <div>
-                                <label for="confirmEmailRegister" class="form-label">Confirm Email:</label>
-                                <input type="email" id="confirmEmailRegister">
-                            </div>
-                            <div>
-                                <button class="btn btn-dark" data-bs-toggle="button">Register</button>
+                                <button class="btn btn-dark" data-bs-toggle="button">Login</button>
                             </div>
                         </form>
                     </section>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-                </div>
             </div>
         </div>
+    </div>
       
     <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
           <a class="navbar-brand" href="index.html">Activity Tracker</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,7 +67,7 @@
                         <li class="nav-item"><a class="nav-link" href="https://github.com/Ultra-Instinct-js/activity-monitor-server" target="_blank">Server</a></li>
                     </ul>
                   </li> -->
-                <li class="nav-item"><a class="nav-link" href="registerPage" data-bs-target="#registerPage" data-bs-toggle="modal">Register</a></li> 
+                <li class="nav-item"><a class="nav-link" href="registerPage" data-bs-target="#loginPage" data-bs-toggle="modal">Register</a></li> 
                 <li class="nav-item"><a class="nav-link" href="loginPage" data-bs-target="#loginPage" data-bs-toggle="modal">Login</a></li>
                 <li class="nav-item"><a class="nav-link" href="signout" data-bs-target="#signout">Signout</a></li>
             </ul> 
@@ -114,73 +76,112 @@
       </nav>
       <main>
         <!-- LIST OF ALL ACTIVITIES TRACKED-->
-        <table class="table table-striped table-bordered">
-          <thead>
-            <tr class="text-center fw-normal">
-              <th scope="col" >Habit</th>
-              <th scope="col">Track</th>
-              <th scope="col">Goal</th>
-              <th scope="col">Count</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td scope="row" class="text-start">Practice Japanese</td>
-              <td class="text-end">60 minutes</td>
-              <td class="text-end">120 minutes</td>
-              <td class="text-end"> 50%</td>
-            </tr>
-            <tr>
-              <td scope="row" class="text-start">Practice Russian</td>
-              <td class="text-end">60 minutes</td>
-              <td class="text-end">240 minutes</td>
-              <td class="text-end">25%</td>
-            </tr>
-          </tbody>
-        </table>
+        <section id="habit-list">
+            <table class="table table-striped table-bordered">
+            <thead>
+                <tr class="text-center fw-normal">
+                <th scope="col">Habit</th>
+                <th scope="col">Progress</th>
+                <th scope="col">Goal</th>
+                <th scope="col">Progress Bar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td scope="row" class="text-start">Practice Japanese</td>
+                <td class="text-end">60 minutes</td>
+                <td class="text-end">120 minutes/day</td>
+                <td class="text-end"> 50%</td>
+                </tr>
+                <tr>
+                <td scope="row" class="text-start">Practice Russian</td>
+                <td class="text-end">60 minutes</td>
+                <td class="text-end">240 minutes</td>
+                <td class="text-end">25%</td>
+                </tr>
+            </tbody>
+            </table>
+        </section>
 
             <!-- MAKING NEW TRACKED HABIT/SHOWS CURRENTLY SELECTED HABIT-->
-        <!-- <article>
+        <article>
             <div class="card justify-content-center " id="trackerCard">
                 <div class="card-body justify-content-center p-6">
-                    <div>
-                        <form action="">
-                            <label for="habit" class="form-label">Habit</label>
-                            <input type="text" name="habit" id="habit" placeholder="Insert the name of the habit you wish to track" class="form-control">
+                    <form action="">
+                        <label for="habit" class="form-label">Habit</label>
+                        <input type="text" name="habit" id="habit" placeholder="Insert the name of the habit you wish to track" class="form-control">
 
-                            <label for="goal" class="form-label">Goal</label>
-                            <input type="number" name="goal" id="goal" placeholder="how much/many do you wish to complete" class="form-control">
+                        <label for="goal" class="form-label">Goal</label>
+                        <input type="number" name="goal" id="goal" placeholder="how much/many do you wish to complete" class="form-control">
 
-                            <label for="unit" class="form-label">Unit of goal</label>
-                            <select name="unit" id="unit" class="form-select">
-                                <option value="times">Times</option>
-                                <option value="hours">Hours</option>
-                                <option value="days">Days</option>
-                                <option value="weeks">Weeks</option>
-                                <option value="months">Months</option>
-                                <option value="years">Years</option>
-                                <option value="metres">Metres</option>
-                                <option value="kilometres">Kilometres</option>
-                                <option value="miles">Miles</option>
-                                <option value="ounces">Ounces</option>
-                                <option value="Cups">Cups</option>
-                                <option value="millilitres">Millilitres</option>
-                                <option value="Litres">Litres</option>
-                                <option value="pounds">Pounds</option>
-                                <option value="stones">Stones</option>
-                                <option value="kilograms">Kilograms</option>
+                        <label for="unit" class="form-label">Unit of goal</label>
+                        <select name="unit" id="unit" class="form-select">
+                            <option value="times">Times</option>
+                            <option value="minutes">Minutes</option>
+                            <option value="hours">Hours</option>
+                            <option value="metres">Metres</option>
+                            <option value="kilometres">Kilometres</option>
+                            <option value="miles">Miles</option>
+                            <option value="ounces">Ounces</option>
+                            <option value="cups">Cups</option>
+                            <option value="millilitres">Millilitres</option>
+                            <option value="litres">Litres</option>
+                            <option value="pounds">Pounds</option>
+                            <option value="stones">Stones</option>
+                            <option value="kilograms">Kilograms</option>
                         </select>
 
-                        <button class="btn btn-success" data-bs-toggle="button">Add tracker</button>
-                            
-                        </form>
-                    </div>
+                        <label for="duration" class="form-label">Duration of goal</label>
+                        <select name="duration" id="duration" class="form-select">
+                            <option value="hours">Hours</option>
+                            <option value="days">Days</option>
+                            <option value="weeks">Weeks</option>
+                            <option value="months">Months</option>
+                            <option value="years">Years</option>
+                        </select>
 
+                    <button class="btn btn-success" data-bs-toggle="button">Add tracker</button>
+                        
+                    </form>
                 </div>
             </div>
-        </article> -->
+        </article>
 
-
+        <article>
+            <div class="card justify-content-center " id="trackerCard">
+                <div class="card-body justify-content-center p-6">
+                    <h2>Stats</h2>
+                    <button id="delete-btn" class="btn btn-danger">Delete</button>
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td>Habit</td>
+                                <td>Practice Japanese</td>
+                            </tr>
+                            <tr>
+                                <td>Progress</td>
+                                <td>60 minutes
+                                <input id="update-prog-input" type="text" placeholder="add progress">
+                                <button class="btn btn-dark btn-sm">+</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Goal</td>
+                                <td>120 minutes/day</td>
+                            </tr>
+                            <tr>
+                                <td>Progression</td>
+                                <td>50%</td>
+                            </tr>
+                            <tr>
+                                <td>Streak</td>
+                                <td>6</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </article>
 
     </main>
                 <!-- FOOTER -->
