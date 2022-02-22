@@ -18,21 +18,22 @@ function showHabitInfo(habitData){
     const newInfo = renderHabitInfo(habitData);
     const info = document.querySelector("#habit-info");
     info.replaceWith(newInfo);
+    return newInfo;
 }
 
 function showLoginForm(){
     const newForm = renderLoginForm();
-    return showForm(newForm);
+    return module.exports.showForm(newForm);
 }
 
 function showRegisterForm(){
     const newForm = renderRegisterForm();
-    return showForm(newForm);
+    return module.exports.showForm(newForm);
 }
 
 function showNewHabitForm(){
     const newForm = renderNewHabitForm();
-    return showForm(newForm);
+    return module.exports.showForm(newForm);
 }
 
 function showForm(newForm){
@@ -42,7 +43,7 @@ function showForm(newForm){
 }
 
 function updateNavigation(){
-    const newLinks = isLoggedIn() ? ["logout"] : ["login", "register"];
+    const newLinks = module.exports.isLoggedIn() ? ["logout"] : ["login", "register"];
     const links = document.querySelectorAll("nav a");
     links.forEach(link => {
         if(newLinks.includes(link.dataset.page)){
@@ -54,11 +55,12 @@ function updateNavigation(){
 }
 
 function isLoggedIn(){
-    const token = decodeToken();
+    const token = localStorage.getItem("token");
     if(token){
-        const jwt = jwt_decode(token);
-        if(jwt){
-            return true;
+        try {
+            return !!jwt_decode(token);
+        } catch (error) {
+            return false;
         }
     }
     return false;
@@ -78,6 +80,10 @@ function navLinkEvent(page){
     }
 }
 
+const testingExports = {
+    showForm, isLoggedIn
+};
+
 module.exports = {
-    showLoginForm, showRegisterForm, showNewHabitForm, showHabits, showHabitInfo, showHome, updateNavigation, decodeToken, navLinkEvent
+    showLoginForm, showRegisterForm, showNewHabitForm, showHabits, showHabitInfo, showHome, updateNavigation, decodeToken, navLinkEvent, ...testingExports
 };
