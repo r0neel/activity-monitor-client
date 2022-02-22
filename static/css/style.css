@@ -27,9 +27,14 @@ td{
 
 th {
     font-weight: normal;
+    border: 1px solid #ccc;
 }
 
-.table > :not(:first-child) {
-    border-top: 1px solid currentcolor;
+.table-bordered>:not(caption)>*>*{
+    border-width: 1px;
+}
+
+tbody, td, tfoot, thead, tr, .table > :not(:first-child){
+    border: none;
 }
 
