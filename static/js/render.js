@@ -42,19 +42,19 @@ function renderLoginForm(){
     form.classList.add("text-center", "login-form");
     form.autocomplete = "off";
 
-    const usernameLabel = document.createElement("label");
-    usernameLabel.for = "usernameLogin";
-    usernameLabel.classList.add("form-label");
-    usernameLabel.textContent = "Username:";
+    const emailLabel = document.createElement("label");
+    emailLabel.for = "emailLogin";
+    emailLabel.classList.add("form-label");
+    emailLabel.textContent = "Email:";
 
-    const usernameInput = document.createElement("input");
-    usernameInput.type = "text";
-    usernameInput.id = "usernameLogin";
-    usernameInput.name = "username";
+    const emailInput = document.createElement("input");
+    emailInput.type = "text";
+    emailInput.id = "emailLogin";
+    emailInput.name = "email";
 
-    const usernameContainer = document.createElement("div");
-    usernameContainer.appendChild(usernameLabel);
-    usernameContainer.appendChild(usernameInput);
+    const emailContainer = document.createElement("div");
+    emailContainer.appendChild(emailLabel);
+    emailContainer.appendChild(emailInput);
 
     const passwordLabel = document.createElement("label");
     passwordLabel.for = "passwordLogin";
@@ -79,7 +79,7 @@ function renderLoginForm(){
     const submitContainer = document.createElement("div");
     submitContainer.appendChild(submitInput);
 
-    form.appendChild(usernameContainer);
+    form.appendChild(emailContainer);
     form.appendChild(passwordContainer);
     form.appendChild(submitContainer);
 
