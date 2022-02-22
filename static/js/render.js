@@ -166,6 +166,27 @@ function renderRegisterForm(){
     return form;
 }
 
+function renderDashboard(){
+    const content = document.createElement("main");
+    content.id = "content";
+
+    const habitList = document.createElement("section");
+    habitList.id = "habit-list";
+    content.appendChild(habitList);
+
+    const cardContainer = document.createElement("article");
+    content.appendChild(cardContainer);
+
+    const card = document.createElement("div");
+    card.id = "trackerCard";
+    card.classList.add("card");
+    cardContainer.appendChild(card);
+
+    const cardBody = document.createElement("div");
+    cardBody.classList.add("card-body");
+    card.appendChild(cardBody);
+}
+
 function renderNewHabitForm(){
     const form = document.createElement("form");
     form.id = "new-habit-form";
@@ -439,5 +460,5 @@ function renderHabitInfo(habitData){
 }
 
 module.exports = {
-    renderHome, renderLoginForm, renderRegisterForm, renderNewHabitForm, renderHabitList, renderHabitInfo
+    renderHome, renderLoginForm, renderRegisterForm, renderNewHabitForm, renderHabitList, renderHabitInfo, renderDashboard
 };

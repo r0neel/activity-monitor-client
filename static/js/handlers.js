@@ -1,5 +1,5 @@
 const { login, register, getHabits, updateHabit, newHabit, deleteHabit } = require("./requests");
-const { showLoginForm, showRegisterForm, showHabits, showHome, updateNavigation, decodeToken, navLinkEvent, showNewHabitForm, showHabitInfo } = require("./helpers");
+const { showLoginForm, showRegisterForm, showHabits, showHome, updateNavigation, decodeToken, navLinkEvent, showNewHabitForm, showHabitInfo, showDashboard } = require("./helpers");
 
 let habitsData = [];
 
@@ -58,7 +58,12 @@ async function navLinkHandler(e){
                 const { uid } = decodeToken();
                 try {
                     habitsData = await getHabits(uid);
-                    showHabits(habitData);
+                    console.log(habitsData);
+                    showDashboard();
+                    const habitList = showHabits(habitData);
+                    // to-do: add click event listeners
+                    const habitForm = showNewHabitForm();
+                    habitForm.addEventListener("submit", habitSubmitHandler);
                 } catch (err) {
                     localStorage.removeItem("token");
                     navLinkHandler(e);
