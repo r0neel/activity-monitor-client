@@ -169,13 +169,12 @@ function renderRegisterForm(){
 function renderNewHabitForm(){
     const form = document.createElement("form");
     form.id = "new-habit-form";
-    form.classList.add();
     form.autocomplete = "off";
 
     const habitLabel = document.createElement("label");
-    habitLabel.for = "habit";
+    habitLabel.for = "habitInput";
     habitLabel.classList.add("form-label");
-    habitLabel.textContent = "Habit"
+    habitLabel.textContent = "Habit";
 
     const habitInput = document.createElement("input");
     habitInput.type = "text";
@@ -185,58 +184,59 @@ function renderNewHabitForm(){
     habitInput.classList.add("form-control");
 
     const goalLabel = document.createElement("label");
-    goalLabel.for = "goal";
+    goalLabel.for = "goalInput";
     goalLabel.classList.add("form-label");
-    goalLabel.textContent = "Goal"
+    goalLabel.textContent = "Goal";
 
     const goalInput = document.createElement("input");
     goalInput.type = "number";
     goalInput.name = "goal";
-    goalInput.id = "goal";
+    goalInput.id = "goalInput";
     goalInput.placeholder = "how much/many do you wish to complete";
     goalInput.classList.add("form-control");
 
     const goalUnitLabel = document.createElement("label");
-    goalUnitLabel.for = "unit";
+    goalUnitLabel.for = "unitInput";
     goalUnitLabel.classList.add("form-label");
+    goalUnitLabel.textContent = "Unit of goal";
 
     const goalUnitSelect = document.createElement("select");
     goalUnitSelect.name = "unit";
-    goalUnitSelect.id = "unit";
-    goalUnitSelect. classList.add("form-select");
+    goalUnitSelect.id = "unitInput";
+    goalUnitSelect.classList.add("form-select");
 
-    const goalUnitArray = ["times","minutes", "hours","metres", "kilometres", "miles", "ounces", "cups", "millilitres", "litres", "pounds", "stones", "kilograms"];
+    const goalUnitArray = ["times", "minutes", "hours","metres", "kilometres", "miles", "ounces", "cups", "millilitres", "litres", "pounds", "stones", "kilograms"];
 
     goalUnitArray.forEach(unit => {
         const goalUnitOption = document.createElement("option")
         goalUnitOption.value = unit;
         goalUnitOption.textContent = unit;
         
-        goalUnitSelect.appendChild(goalUnitOption) 
-    })
+        goalUnitSelect.appendChild(goalUnitOption);
+    });
 
     const goalDurationLabel = document.createElement("label");
-    goalDurationLabel.for = "duration";
+    goalDurationLabel.for = "durationInput";
     goalDurationLabel.classList.add("form-label");
 
     const goalDurationSelect = document.createElement("select");
     goalDurationSelect.name = "duration";
-    goalDurationSelect.id = "duration";
+    goalDurationSelect.id = "durationInput";
     goalDurationSelect. classList.add("form-select");
 
-    const goalDurationArray = ["hours","days", "weeks","months", "years"];
+    const goalDurationArray = ["hours", "days", "weeks", "months", "years"];
 
     goalDurationArray.forEach(unit => {
-        const goalDurationOption = document.createElement("option")
+        const goalDurationOption = document.createElement("option");
         goalDurationOption.value = unit;
         goalDurationOption.textContent = unit;
         
-        goalDurationSelect.appendChild(goalDurationOption) 
+        goalDurationSelect.appendChild(goalDurationOption);
     })
 
-    const submitAddTracker = document.createElement("button");
+    const submitAddTracker = document.createElement("input");
     submitAddTracker.type = "submit";
-    submitAddTracker.classList.add("btn","btn-success");
+    submitAddTracker.classList.add("btn", "btn-success");
     submitAddTracker.id = "submitAddTracker";
     submitAddTracker.value = "Add tracker";
 
@@ -250,7 +250,7 @@ function renderNewHabitForm(){
     form.appendChild(goalDurationSelect);
     form.appendChild(submitAddTracker);
 
-    return form
+    return form;
 }
 
 // render list of habits with details
