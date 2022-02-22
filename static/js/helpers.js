@@ -23,11 +23,15 @@ function showHabitInfo(habitData){
 
 function showLoginForm(){
     const newForm = renderLoginForm();
+    document.querySelector("#login-modal h3").textContent = "Log In";
+    document.querySelector("#form-toggle").checked = true;
     return module.exports.showForm(newForm);
 }
 
 function showRegisterForm(){
     const newForm = renderRegisterForm();
+    document.querySelector("#login-modal h3").textContent = "Sign Up";
+    document.querySelector("#form-toggle").checked = false;
     return module.exports.showForm(newForm);
 }
 
@@ -44,7 +48,7 @@ function showForm(newForm){
 
 function updateNavigation(){
     const newLinks = module.exports.isLoggedIn() ? ["logout"] : ["login", "register"];
-    const links = document.querySelectorAll("nav a");
+    const links = document.querySelectorAll("nav li > a");
     links.forEach(link => {
         if(newLinks.includes(link.dataset.page)){
             link.parentElement.classList.remove("d-none");

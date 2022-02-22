@@ -16,7 +16,7 @@ async function loginSubmitHandler(e){
     }
 }
 
-function registerSubmitHandler(e){
+async function registerSubmitHandler(e){
     e.preventDefault();
     try {
         const formData = new FormData(e.target);
@@ -45,6 +45,7 @@ function formToggleHandler(e){
 async function navLinkHandler(e){
     e.preventDefault();
     let page = e.target.dataset.page;
+    let form;
     switch(page){
         case "logout":
             localStorage.removeItem("token");
@@ -64,11 +65,11 @@ async function navLinkHandler(e){
             }
             break;
         case "login":
-            const form = showLoginForm();
+            form = showLoginForm();
             form.addEventListener("submit", loginSubmitHandler);
             break;
         case "register":
-            const form = showRegisterForm();
+            form = showRegisterForm();
             form.addEventListener("submit", registerSubmitHandler);
             break;
     }
