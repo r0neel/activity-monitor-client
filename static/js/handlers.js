@@ -3,6 +3,10 @@ const { showLoginForm, showRegisterForm, showHabits, showHome, updateNavigation,
 
 let habitsData = [];
 
+function pageLoadHandler(){
+    navLinkHandler(navLinkEvent("home"));
+}
+
 async function loginSubmitHandler(e){
     e.preventDefault();
     try {
@@ -32,8 +36,8 @@ async function registerSubmitHandler(e){
 
 function formToggleHandler(e){
     e.preventDefault();
-    const form = e.target; //todo: select current form
-    if(form.id.contains("login")){
+    const form = document.querySelector(".login-form");
+    if(form.id.includes("login")){
         const form = showRegisterForm();
         form.addEventListener("submit", registerSubmitHandler);
     } else {
@@ -133,5 +137,6 @@ async function habitDeleteBtnHandler(e){
 module.exports = {
     loginSubmitHandler, registerSubmitHandler, formToggleHandler,
     navLinkHandler, habitClickHandler, newHabitClickHandler,
-    habitUpdateHandler, habitSubmitHandler, habitDeleteBtnHandler
+    habitUpdateHandler, habitSubmitHandler, habitDeleteBtnHandler,
+    pageLoadHandler
 };
