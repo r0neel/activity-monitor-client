@@ -105,7 +105,7 @@
         <article>
             <div class="card" id="trackerCard">
                 <div class="card-body">
-                    <form>
+                    <form id="new-habit-form">
                         <label for="habit" class="form-label">Habit</label>
                         <input type="text" name="habit" id="habit" placeholder="Insert the name of the habit you wish to track" class="form-control">
 
@@ -138,7 +138,8 @@
                             <option value="years">Years</option>
                         </select>
 
-                    <button class="btn btn-success" data-bs-toggle="button">Add tracker</button>
+                    <button class="btn btn-success" id="submitAddTracker" data-bs-toggle="button" type="submit" value="Add tracker">Add tracker</button>
+                    
                         
                     </form>
                 </div>
