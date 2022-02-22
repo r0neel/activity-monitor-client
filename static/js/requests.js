@@ -6,7 +6,7 @@ function login({username, password}){
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username, password })
             };
-            const response = await fetch(`${API_HOST}/login`, options);
+            const response = await fetch(`${API_HOST}/auth/login`, options);
             const json = await response.json();
             if(!json.status !== 200) throw new Error(json);
             resolve(json);
@@ -24,7 +24,7 @@ function register({username, email, password}){
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username, email, password })
             };
-            const response = await fetch(`${API_HOST}/register`, options);
+            const response = await fetch(`${API_HOST}/auth/register`, options);
             const json = await response.json();
             if(!json.success) throw new Error(json);
             resolve(json);
