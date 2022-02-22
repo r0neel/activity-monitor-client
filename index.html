@@ -109,33 +109,29 @@
           </div>
         </div>
       </nav>
-      <Main>
+      <main>
         <!-- LIST OF ALL ACTIVITIES TRACKED-->
-        <section>
-            <div class="card justify-content-center " id="trackerListCard">
-                <div class="card-body justify-content-center p-6">
-                    <div class="container">
-                        <ul style="list-style: none;" class="">
-                            <li class="">Habit</li>
-                            <li class="">Track</li>
-                            <li class="">Goal</li>
-                            <li class="">Count</li>
-                        </ul>
-                    </div>
-                    <div class="container">
-                        <ul style="list-style: none;">
-                            <li class=""><a class="nav-link" href="moreInfoCard" data-bs-target="moreInfoCard">Practice Japanese</a></li>
-                            <li class=""><a class="nav-link" href="moreInfoCard" data-bs-target="moreInfoCard">60 minutes</a></li>
-                            <li class=""><a class="nav-link" href="moreInfoCard" data-bs-target="moreInfoCard">120 minutes</a></li>
-                            <li class=""><a class="nav-link" href="moreInfoCard" data-bs-target="moreInfoCard">PERCENTAGE BAR HERE</a></li>
-                        </ul>
-                    </div>
-    
-                </div>
-            </div>
-        </section>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Habit</th>
+              <th scope="col">Track</th>
+              <th scope="col">Goal</th>
+              <th scope="col">Count</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td scope="row">Practice Japanese</td>
+              <td>60 minutes</td>
+              <td>120 minutes</td>
+              <td> 50%</td>
+            </tr>
+          </tbody>
+        </table>
+
             <!-- MAKING NEW TRACKED HABIT/SHOWS CURRENTLY SELECTED HABIT-->
-        <article>
+        <!-- <article>
             <div class="card justify-content-center " id="trackerCard">
                 <div class="card-body justify-content-center p-6">
                     <div>
@@ -173,18 +169,19 @@
 
                 </div>
             </div>
-        </article>
+        </article> -->
 
 
-            <!-- FOOTER -->
-    <footer class=" page-footer py-4 navbar-light bg-secondary text-muted">
-        <div class="container">
-            <p class="m-0 text-center text-white">
-                Published under the ISC License. <br/>
-                Deployed with Netlify and Heroku. 
-            </p>
-        </div>
-    </footer>
-    </Main>
+
+    </main>
+                <!-- FOOTER -->
+                <!-- <footer class=" page-footer py-4 navbar-light bg-secondary text-muted">
+                  <div class="container">
+                      <p class="m-0 text-center text-white">
+                          Published under the ISC License. <br/>
+                          Deployed with Netlify and Heroku. 
+                      </p>
+                  </div>
+              </footer> -->
 </body>
 </html>
