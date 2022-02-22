@@ -12,7 +12,7 @@ async function loginSubmitHandler(e){
     try {
         const formData = new FormData(e.target);
         const response = await login(Object.fromEntries(formData));
-        localStorage.setItem("token", response.token);
+        localStorage.setItem("token", response.token.slice(7));
         navLinkHandler(navLinkEvent("home"));
     } catch (err) {
         // bad login
@@ -25,7 +25,7 @@ async function registerSubmitHandler(e){
     try {
         const formData = new FormData(e.target);
         const response = await register(Object.fromEntries(formData));
-        if(response.success){
+        if(response === "User created"){
             loginSubmitHandler(e);
         } else throw new Error(response);
     } catch (err) {
