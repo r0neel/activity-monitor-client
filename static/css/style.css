@@ -92,3 +92,8 @@ nav {
 #update-prog-input:focus {
     outline: 1px solid #ccc;
 }
+
+#trackYourHabits {
+    font-size: 60px;
+    font-weight: 700;
+}
