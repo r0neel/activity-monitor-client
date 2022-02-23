@@ -85,7 +85,6 @@ async function navLinkHandler(e){
                 const { uid } = decodeToken();
                 try {
                     habitsData = await getHabits(uid);
-                    console.log(habitsData);
                     showDashboard();
 
                     const habitList = showHabits(habitsData);
