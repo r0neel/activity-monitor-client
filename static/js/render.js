@@ -323,6 +323,7 @@ function renderHabitList(habitData){
         let progression = (progress / data.goal) * 100;
 
         const row = document.createElement("tr");
+        row.dataset.hid = data._id;
 
         // first three columns
         [
@@ -371,7 +372,7 @@ function renderHabitInfo(habitData){
     //to do - calculate stats from data
     let progress = 0;
     let stringDuration = "days";
-    let progression = (progress / data.goal) * 100;
+    let progression = (progress / habitData.goal) * 100;
     let streak = 0;
 
     const container = document.createElement("div");
@@ -381,13 +382,14 @@ function renderHabitInfo(habitData){
     // delete button
     const delBtn = document.createElement("button");
     delBtn.id = "delete-btn";
-    delBtn.classList("btn", "btn-danger");
+    delBtn.classList.add("btn", "btn-danger");
     delBtn.textContent = "Delete";
     container.appendChild(delBtn);
 
     // table
     const table = document.createElement("table");
     const tbody = document.createElement("tbody");
+    table.classList.add("table", "table-striped");
     table.appendChild(tbody);
     container.appendChild(table);
 
@@ -458,7 +460,7 @@ function renderHabitInfo(habitData){
     // current streak display row
     const streakRow = document.createElement("tr");
     const streakLabelCol = document.createElement("td");
-    streakLabelCol.textContent = "Goal";
+    streakLabelCol.textContent = "Streak";
     streakRow.appendChild(streakLabelCol);
     const streakCol = document.createElement("td");
     streakCol.textContent = `${streak} ${stringDuration}`;
