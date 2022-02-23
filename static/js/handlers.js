@@ -79,12 +79,16 @@ async function navLinkHandler(e){
                     habitsData = await getHabits(uid);
                     console.log(habitsData);
                     showDashboard();
+
                     const habitList = showHabits(habitsData);
-                    // to-do: add click event listeners
+                    const rows = habitList.querySelectorAll("tbody > tr");
+                    rows.forEach(row => {
+                        row.addEventListener("click", habitClickHandler);
+                    });
+
                     const habitForm = showNewHabitForm();
                     habitForm.addEventListener("submit", habitSubmitHandler);
                 } catch (err) {
-                    console.log(err);
                     localStorage.removeItem("token");
                     navLinkHandler(e);
                     return;
@@ -106,9 +110,11 @@ async function navLinkHandler(e){
 }
 
 function habitClickHandler(e){
-    const hid = e.target.dataset.hid;
-    const habitData = habitsData.find(habit => habit.id === hid);
-    showHabitInfo(habitData);
+    const hid = e.target.parentElement.dataset.hid;
+    const habitData = habitsData.find(habit => habit._id === hid);
+    const habitInfo = showHabitInfo(habitData);
+    const delBtn = habitInfo.querySelector("#delete-btn");
+    delBtn.addEventListener("click", habitDeleteBtnHandler);
 }
 
 function newHabitClickHandler(e){
