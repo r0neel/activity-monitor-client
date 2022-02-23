@@ -176,4 +176,144 @@ describe("render functions", () => {
         });
 
     });
+
+    describe("renderLoginForm", () => {
+
+        const form = render.renderLoginForm();
+
+        it("<form> element returned for form", () => {
+            expect(form.tagName).toBe('FORM')
+        })
+
+        it("form has id of login-form", () => {
+            expect(form.id).toBe("login-form");
+        });
+
+        it('return element has correct class of text-center for form', () => {
+            expect(form.classList.contains('text-center')).toBe(true);
+        });
+
+        it('return element has correct class of login-form for form', () => {
+            expect(form.classList.contains('login-form')).toBe(true);
+        });
+
+        emailLabel = form.firstChild.firstChild
+                // = content.children[1]
+
+        it("<label> element returned for emailLabel", () => {
+            expect(emailLabel.tagName).toBe('LABEL')
+        })
+        
+        it("emailLogin returned for  to be emailLabel", () => {
+            expect(emailLabel.for).toBe('emailLogin')
+        })
+
+        it('return element has correct class of form-label for emailLabel', () => {
+            expect(emailLabel.classList.contains('form-label')).toBe(true);
+        });
+
+        it("emailLabel has innerHTML of Email:", () => {
+            expect(emailLabel.innerHTML).toBe("Email:");
+        });
+
+        emailInput = form.firstChild.children[1]
+
+        it("<input> element returned for emailInput", () => {
+            expect(emailInput.tagName).toBe('INPUT')
+        })
+        
+        it("emailInput returned type to be text", () => {
+            expect(emailInput.type).toBe('text')
+        });
+        
+        it("emailLabel has id of emailLogin", () => {
+            expect(emailInput.id).toBe("emailLogin");
+        });
+
+        it("emailLabel has innerHTML of Email:", () => {
+            expect(emailInput.name).toBe("email");
+        });
+
+        div1 = form.firstChild
+
+        it("div1 has 2 children", () => {
+            expect(div1.children.length).toBe(2);
+        });
+
+
+        passwordLabel = form.children[1].firstChild
+
+        // it("<label> element returned for passwordLabel", () => {
+        //     expect(emailInput.tagName).toBe('LABEL')
+        // })
+        
+        it("passwordLabel returned for to be passwordLogin", () => {
+            expect(passwordLabel.for).toBe('passwordLogin')
+        });
+        
+        it('return element has correct class of form-label for passwordLabel', () => {
+            expect(passwordLabel.classList.contains('form-label')).toBe(true);
+        });
+
+        it("passwordLabel has innerHTML of Password:", () => {
+            expect(passwordLabel.innerHTML).toBe("Password:");
+        });
+
+        passwordInput = form.children[1].children[1]
+
+        it("<input> element returned for passwordInput", () => {
+            expect(passwordInput.tagName).toBe('INPUT')
+        })
+        
+        it("passwordInput returned type to be password", () => {
+            expect(passwordInput.type).toBe('password')
+        });
+        
+        it("passwordInput has id of emailLogin", () => {
+            expect(passwordInput.id).toBe("passwordLogin");
+        });
+
+        it("passwordInput has innerHTML of Email:", () => {
+            expect(passwordInput.name).toBe("password");
+        });
+
+        div2 = form.children[1]
+
+        it("div2 has 2 children", () => {
+            expect(div2.children.length).toBe(2);
+        });
+
+        submitInput = form.children[2].children[0]
+
+        it("<input> element returned for submitInput", () => {
+            expect(submitInput.tagName).toBe('INPUT')
+        })
+        
+        it("submitInput returned type to be submit", () => {
+            expect(submitInput.type).toBe('submit')
+        });
+
+        it('return element has correct class of btn for submitInput', () => {
+            expect(submitInput.classList.contains('btn')).toBe(true);
+        });
+
+        it('return element has correct class of btn-dark for submitInput', () => {
+            expect(submitInput.classList.contains('btn-dark')).toBe(true);
+        });
+        
+        it("submitInput has id of loginSubmit", () => {
+            expect(submitInput.id).toBe("loginSubmit");
+        });
+
+        it("submitInput has innerHTML of Log In", () => {
+            expect(submitInput.value).toBe("Log In");
+        });
+
+        div3 = form.children[2]
+
+        it("div3 has 1 child", () => {
+            expect(div3.children.length).toBe(1);
+        });
+    });
+
 });
