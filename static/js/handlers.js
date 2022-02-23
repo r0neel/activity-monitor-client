@@ -1,15 +1,27 @@
 const { login, register, getHabits, updateHabit, newHabit, deleteHabit } = require("./requests");
-const { showLoginForm, showRegisterForm, showHabits, showHome, updateNavigation, decodeToken, navLinkEvent, showNewHabitForm, showHabitInfo } = require("./helpers");
+const { showLoginForm, showRegisterForm, showHabits, showHome, updateNavigation, decodeToken, navLinkEvent, showNewHabitForm, showHabitInfo, showDashboard } = require("./helpers");
 
 let habitsData = [];
+
+function pageLoadHandler(){
+    navLinkHandler(navLinkEvent("home"));
+}
 
 async function loginSubmitHandler(e){
     e.preventDefault();
     try {
-        const formData = new FormData(e.target);
-        const response = await login(Object.fromEntries(formData));
-        localStorage.setItem("token", response.token);
+        const formData = Object.fromEntries(new FormData(e.target));
+
+        for(let key in formData){
+            if(formData[key] === ""){
+                throw new Error("Required fields missing.");
+            }
+        }
+        
+        const response = await login(formData);
+        localStorage.setItem("token", response.token.slice(7));
         navLinkHandler(navLinkEvent("home"));
+        document.querySelector("#login-modal").click();
     } catch (err) {
         // bad login
         console.warn(err);
@@ -19,9 +31,20 @@ async function loginSubmitHandler(e){
 async function registerSubmitHandler(e){
     e.preventDefault();
     try {
-        const formData = new FormData(e.target);
-        const response = await register(Object.fromEntries(formData));
-        if(response.success){
+        const formData = Object.fromEntries(new FormData(e.target));
+
+        for(let key in formData){
+            if(formData[key] === ""){
+                throw new Error("Required fields missing.");
+            }
+        }
+
+        if(formData.password !== formData.passwordConfirm){
+            throw new Error("Passwords don't match.");
+        }
+
+        const response = await register(formData);
+        if(response === "User created"){
             loginSubmitHandler(e);
         } else throw new Error(response);
     } catch (err) {
@@ -32,8 +55,8 @@ async function registerSubmitHandler(e){
 
 function formToggleHandler(e){
     e.preventDefault();
-    const form = e.target; //todo: select current form
-    if(form.id.contains("login")){
+    const form = document.querySelector(".login-form");
+    if(form.id.includes("login")){
         const form = showRegisterForm();
         form.addEventListener("submit", registerSubmitHandler);
     } else {
@@ -54,8 +77,14 @@ async function navLinkHandler(e){
                 const { uid } = decodeToken();
                 try {
                     habitsData = await getHabits(uid);
-                    showHabits(habitData);
+                    console.log(habitsData);
+                    showDashboard();
+                    const habitList = showHabits(habitsData);
+                    // to-do: add click event listeners
+                    const habitForm = showNewHabitForm();
+                    habitForm.addEventListener("submit", habitSubmitHandler);
                 } catch (err) {
+                    console.log(err);
                     localStorage.removeItem("token");
                     navLinkHandler(e);
                     return;
@@ -133,5 +162,6 @@ async function habitDeleteBtnHandler(e){
 module.exports = {
     loginSubmitHandler, registerSubmitHandler, formToggleHandler,
     navLinkHandler, habitClickHandler, newHabitClickHandler,
-    habitUpdateHandler, habitSubmitHandler, habitDeleteBtnHandler
+    habitUpdateHandler, habitSubmitHandler, habitDeleteBtnHandler,
+    pageLoadHandler
 };

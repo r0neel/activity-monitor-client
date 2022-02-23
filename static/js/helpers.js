@@ -1,10 +1,17 @@
-const { renderLoginForm, renderRegisterForm, renderHabitList, renderHome, renderNewHabitForm, renderHabitInfo } = require("./render");
+const { renderLoginForm, renderRegisterForm, renderHabitList, renderHome, renderNewHabitForm, renderHabitInfo, renderDashboard } = require("./render");
 
 function showHome(){
     const newContent = renderHome();
     const content = document.querySelector("#content");
     content.replaceWith(newContent);
     return newContent;
+}
+
+function showDashboard(){
+    const newContent = renderDashboard();
+    const content = document.querySelector("#content");
+    content.replaceWith(newContent);
+    return content;
 }
 
 function showHabits(habitData){
@@ -16,8 +23,8 @@ function showHabits(habitData){
 
 function showHabitInfo(habitData){
     const newInfo = renderHabitInfo(habitData);
-    const info = document.querySelector("#habit-info");
-    info.replaceWith(newInfo);
+    const cardBody = document.querySelector(".card-body");
+    cardBody.replaceChildren(newInfo);
     return newInfo;
 }
 
@@ -37,7 +44,9 @@ function showRegisterForm(){
 
 function showNewHabitForm(){
     const newForm = renderNewHabitForm();
-    return module.exports.showForm(newForm);
+    const cardBody = document.querySelector(".card-body");
+    cardBody.replaceChildren(newForm);
+    return newForm;
 }
 
 function showForm(newForm){
@@ -89,5 +98,6 @@ const testingExports = {
 };
 
 module.exports = {
-    showLoginForm, showRegisterForm, showNewHabitForm, showHabits, showHabitInfo, showHome, updateNavigation, decodeToken, navLinkEvent, ...testingExports
+    showLoginForm, showRegisterForm, showNewHabitForm, showHabits, showHabitInfo, showHome, updateNavigation, decodeToken, navLinkEvent, showDashboard, 
+    ...testingExports
 };

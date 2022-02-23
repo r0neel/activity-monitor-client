@@ -3,10 +3,6 @@ body{
     font-family: 'Inter', sans-serif;
 }
 
-main{
-    height: 300px;
-}
-
 article{
     padding: 3% 27%;
 }
@@ -21,7 +17,7 @@ article{
     margin-top: 1.5rem;
 }
 
-td{
+td, a, .form-check-input{
     cursor: pointer;
 }
 
