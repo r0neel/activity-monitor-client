@@ -317,19 +317,14 @@ function renderHabitList(habitData){
 
     // table rows
     habitData.forEach(data => {
-        // to do - calculate stats from habit data
-        let progress = 0;
-        let stringDuration = "days";
-        let progression = (progress / data.goal) * 100;
-
         const row = document.createElement("tr");
         row.dataset.hid = data._id;
 
         // first three columns
         [
             data.habit, // habit name
-            `${progress} ${data.unit}`, // progress
-            `${data.goal} ${data.unit}/${stringDuration}` // goal
+            `${data.progress} ${data.unit}`, // progress
+            `${data.goal} ${data.unit}/${data.durationAsString}` // goal
         ].forEach((text, i) => {
             const col = document.createElement("td");
 
@@ -355,10 +350,10 @@ function renderHabitList(habitData){
         const progBar = document.createElement("div");
         progBar.classList.add("progress-bar");
         progBar.role = "progressbar";
-        progBar.setAttribute("aria-valuenow", progression);
+        progBar.setAttribute("aria-valuenow", data.progressPercentage);
         progBar.setAttribute("aria-valuemin", 0);
         progBar.setAttribute("aria-valuemax", 100);
-        progBar.style.width = `${progression}%`;
+        progBar.style.width = `${data.progressPercentage}%`;
         progContainer.appendChild(progBar);
 
         tbody.appendChild(row);
@@ -369,12 +364,6 @@ function renderHabitList(habitData){
 
 // render stats for single habit
 function renderHabitInfo(habitData){
-    //to do - calculate stats from data
-    let progress = 0;
-    let stringDuration = "days";
-    let progression = (progress / habitData.goal) * 100;
-    let streak = 0;
-
     const container = document.createElement("div");
     container.classList.add("card-body");
     container.innerHTML = "<h2>Stats</h2>"; // heading
@@ -411,7 +400,7 @@ function renderHabitInfo(habitData){
     progressLabelCol.classList.add("align-middle");
     progressRow.appendChild(progressLabelCol);
     const progressCol = document.createElement("td");
-    progressCol.textContent = `${progress} ${habitData.unit}`;
+    progressCol.textContent = `${habitData.progress} ${habitData.unit}`;
     progressRow.appendChild(progressCol);
     const progressInput = document.createElement("input");
     progressInput.id = "update-prog-input";
@@ -433,7 +422,7 @@ function renderHabitInfo(habitData){
     goalLabelCol.textContent = "Goal";
     goalRow.appendChild(goalLabelCol);
     const goalCol = document.createElement("td");
-    goalCol.textContent = `${habitData.goal} ${habitData.unit}/${stringDuration}`;
+    goalCol.textContent = `${habitData.goal} ${habitData.unit}/${habitData.durationAsString}`;
     goalRow.appendChild(goalCol);
     tbody.appendChild(goalRow);
 
@@ -454,10 +443,10 @@ function renderHabitInfo(habitData){
     const progBar = document.createElement("div");
     progBar.classList.add("progress-bar");
     progBar.role = "progressbar";
-    progBar.setAttribute("aria-valuenow", progression);
+    progBar.setAttribute("aria-valuenow", habitData.progressPercentage);
     progBar.setAttribute("aria-valuemin", 0);
     progBar.setAttribute("aria-valuemax", 100);
-    progBar.style.width = `${progression}%`;
+    progBar.style.width = `${habitData.progressPercentage}%`;
     progContainer.appendChild(progBar);
 
     tbody.appendChild(progbarRow);
@@ -468,7 +457,7 @@ function renderHabitInfo(habitData){
     streakLabelCol.textContent = "Streak";
     streakRow.appendChild(streakLabelCol);
     const streakCol = document.createElement("td");
-    streakCol.textContent = `${streak} ${stringDuration}`;
+    streakCol.textContent = `${habitData.streak} ${habitData.durationAsString}`;
     streakRow.appendChild(streakCol);
     tbody.appendChild(streakRow);
 

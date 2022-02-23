@@ -15,6 +15,7 @@ function showDashboard(){
 }
 
 function showHabits(habitData){
+    habitData = habitData.map(habitDataWrapper);
     const newHabitList = renderHabitList(habitData);
     const habitList = document.querySelector("#habit-list");
     habitList.replaceWith(newHabitList);
@@ -22,6 +23,7 @@ function showHabits(habitData){
 }
 
 function showHabitInfo(habitData){
+    habitData = habitDataWrapper(habitData);
     const newInfo = renderHabitInfo(habitData);
     const cardBody = document.querySelector(".card-body");
     cardBody.replaceChildren(newInfo);
@@ -102,6 +104,58 @@ function toggleUpdateInput(){
     } else {
         input.style.width = "0px";
     }
+}
+
+function habitDataWrapper(habitData){
+    const progress = calculateProgress(habitData);
+    return {
+        ...habitData,
+        durationAsString: durationToString(habitData.duration),
+        streak: calculateStreak(habitData),
+        progress,
+        progressPercentage: (progress / habitData.goal) * 100
+    };
+}
+
+function calculateHistoryTotals(habitData){
+    const totalTotals = Math.ceil((Date.now() - habitData.creationDate) / habitData.duration);
+    let history = new Array(totalTotals).fill(0);
+    habitData.history.forEach(entry => {
+        const index = Math.floor((entry.time - habitData.creationDate) / habitData.duration);
+        history[index] += entry.amount;
+    });
+    return history;
+}
+
+function calculateStreak(habitData){
+    let history = calculateHistoryTotals(habitData);
+    let streak = 0;
+    for(let i = history.length - 1; i >= 0; i--){
+        if(history[i] >= habitData.goal){
+            streak++;
+        } else {
+            return streak;
+        }
+    }
+    return streak;
+}
+
+function calculateProgress(habitData){
+    let history = calculateHistoryTotals(habitData);
+    return history[history.length - 1];
+}
+
+function durationToString(time){
+    const durations = [
+        ["hours", 3600000], 
+        ["days", 86400000], 
+        ["weeks", 604800000], 
+        ["months", 2419200000], 
+        ["years", 31536000000]
+    ];
+    let stringDuration = durations.find(d => d[1] === time);
+    if(!stringDuration) throw new Error("Invalid goal duration.");
+    return stringDuration[0];
 }
 
 const testingExports = {
