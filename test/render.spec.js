@@ -537,6 +537,70 @@ describe("render functions", () => {
         it("div5 has 2 children", () => {
             expect(div3.children.length).toBe(2);
         });
+    });
+
+    describe("renderDashboard", () => {
+      
+            const content = render.renderDashboard();
+    
+            it("<main> element returned for content", () => {
+                expect(content.tagName).toBe('MAIN')
+            })
+    
+            it("content has id of content", () => {
+                expect(content.id).toBe("content");
+            });
+
+            const habitList = content.children[0]
+
+            it("habitList has id of habit-list", () => {
+                expect(habitList.id).toBe("habit-list");
+            });
+
+            it("habitList has 0 children", () => {
+                expect(habitList.children.length).toBe(0);
+            });
+
+            const cardContainer = content.children[1]
+            
+            it("cardContainer has 1 child", () => {
+                expect(cardContainer.children.length).toBe(1);
+            });
+
+            const card = content.children[1].children[0]
+    
+            it("<div> element returned for card", () => {
+                expect(card.tagName).toBe('DIV')
+            })
+    
+            it("card has id of content", () => {
+                expect(card.id).toBe("trackerCard");
+            });
+
+            it('return element has correct class of card for card', () => {
+                expect(card.classList.contains('card')).toBe(true);
+            });
+
+            it("card has 1 child", () => {
+                expect(card.children.length).toBe(1);
+            });
+
+            const cardBody = content.children[1].children[0].children[0]
+    
+            it("<div> element returned for cardBody", () => {
+                expect(cardBody.tagName).toBe('DIV')
+            })
+
+            it('return element has correct class of card-body for cardBody', () => {
+                expect(cardBody.classList.contains('card-body')).toBe(true);
+            });
+
+            it("card has 1 child", () => {
+                expect(card.children.length).toBe(1);
+            });
+    });
+
+    describe("renderDashboard", () => {
         
     });
 });
