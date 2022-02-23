@@ -47,6 +47,8 @@ Build a habit tracking website where users can make an account and create habits
 * Added toggle button to switch between sign up and log in forms.
 * Changed log in to use email instead of username.
 * Added validation to login/register forms.
+* Added time until next reset and consistency bar to stats display.
+* Enforced password strength when signing up (8+ chars, 1+ uppercase).
 
 ## Fixed Bugs
 
