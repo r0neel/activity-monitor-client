@@ -21,6 +21,7 @@ async function loginSubmitHandler(e){
         const response = await login(formData);
         localStorage.setItem("token", response.token.slice(7));
         navLinkHandler(navLinkEvent("home"));
+        document.querySelector("#login-modal").click();
     } catch (err) {
         // bad login
         console.warn(err);
@@ -78,11 +79,12 @@ async function navLinkHandler(e){
                     habitsData = await getHabits(uid);
                     console.log(habitsData);
                     showDashboard();
-                    const habitList = showHabits(habitData);
+                    const habitList = showHabits(habitsData);
                     // to-do: add click event listeners
                     const habitForm = showNewHabitForm();
                     habitForm.addEventListener("submit", habitSubmitHandler);
                 } catch (err) {
+                    console.log(err);
                     localStorage.removeItem("token");
                     navLinkHandler(e);
                     return;
