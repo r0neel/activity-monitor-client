@@ -12,5 +12,5 @@ function init(){
     pageLoadHandler();
 }
 
-window.API_HOST = "http://localhost:3000";
+window.API_HOST = "https://activity-monitor-server.herokuapp.com";
 init();
