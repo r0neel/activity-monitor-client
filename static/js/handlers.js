@@ -43,6 +43,14 @@ async function registerSubmitHandler(e){
             throw new Error("Passwords don't match.");
         }
 
+        if(formData.password.length < 8){
+            throw new Error("Password must be at least 8 characters long.");
+        }
+
+        if(formData.password.toLowerCase() === formData.password){
+            throw new Error("Password must contain at least 1 uppercase char.");
+        }
+
         const response = await register(formData);
         if(response === "User created"){
             loginSubmitHandler(e);
