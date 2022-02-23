@@ -5,6 +5,8 @@
 [![GitHub latest commit](https://img.shields.io/github/last-commit/Ultra-Instinct-js/activity-monitor-client.svg)](https://github.com/Ultra-Instinct-js/activity-monitor-client/commit/)
 [![GitHub forks](https://img.shields.io/github/forks/Ultra-Instinct-js/activity-monitor-client.svg)](https://github.com/Ultra-Instinct-js/activity-monitor-client)
 
+Client-side repo for the Activity Monitor group project. Main project repo can be found [here](https://github.com/Ultra-Instinct-js/activity-monitor-main).
+
 ## Installation & Usage
 
 1. Clone the repo `git clone git@github.com:Ultra-Instinct-js/activity-monitor-client.git`
@@ -17,6 +19,10 @@
 * `npm run dev` to run the client server and watch for JavaScript changes with [`watchify`](https://github.com/browserify/watchify).
 * `npm run bundle` to build a JavaScript bundle using [`browserify`](https://github.com/browserify/browserify).
 
+### Deploy
+
+The client side is currently deployed at https://ultra-activity-monitor.netlify.app/
+
 ## Project Goal
 
 Build a habit tracking website where users can make an account and create habits for themselves to track and update.
@@ -27,6 +33,8 @@ Build a habit tracking website where users can make an account and create habits
 * Users should be able to see that their habit is complete as well as their most recent completion streak.
 
 ## Design & Implementation
+
+The main idea behind the design of the client side was that it should be a single-page web application with dynamically updating content.
 
 ### Figma designs
 
@@ -73,7 +81,11 @@ Build a habit tracking website where users can make an account and create habits
 
 ## Improvements & Future Features
 
-
+* Data visualisation for the progress of a user's habits.
+* The ability to view a habit's update history and undo accidental changes.
+* Account deletion.
+* Specifiable goal duration amounts as well as units.
 
 ## License
 
+* [ISC License](https://www.isc.org/licenses/)
