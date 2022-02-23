@@ -147,7 +147,7 @@ function consistencyBars(habitData){
     let unitPercentage = 100 / history.length;
     return history.map(entry => ({
         length: unitPercentage,
-        color: entry > 0 ? "#0d6efd" : "#00000000"
+        color: entry >= habitData.goal ? "#0d6efd" : "#00000000"
     }));
 }
 
@@ -158,11 +158,11 @@ function calculateProgress(habitData){
 
 function durationToString(time){
     const durations = [
-        ["hours", 3600000], 
-        ["days", 86400000], 
-        ["weeks", 604800000], 
-        ["months", 2419200000], 
-        ["years", 31536000000]
+        ["hour", 3600000], 
+        ["day", 86400000], 
+        ["week", 604800000], 
+        ["month", 2419200000], 
+        ["year", 31536000000]
     ];
     let stringDuration = durations.find(d => d[1] === time);
     if(!stringDuration) throw new Error("Invalid goal duration.");
