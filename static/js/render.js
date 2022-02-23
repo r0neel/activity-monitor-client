@@ -384,6 +384,7 @@ function renderHabitInfo(habitData){
     delBtn.id = "delete-btn";
     delBtn.classList.add("btn", "btn-danger");
     delBtn.textContent = "Delete";
+    delBtn.dataset.hid = habitData._id;
     container.appendChild(delBtn);
 
     // table
@@ -407,6 +408,7 @@ function renderHabitInfo(habitData){
     const progressRow = document.createElement("tr");
     const progressLabelCol = document.createElement("td");
     progressLabelCol.textContent = "Progress";
+    progressLabelCol.classList.add("align-middle");
     progressRow.appendChild(progressLabelCol);
     const progressCol = document.createElement("td");
     progressCol.textContent = `${progress} ${habitData.unit}`;
@@ -415,10 +417,13 @@ function renderHabitInfo(habitData){
     progressInput.id = "update-prog-input";
     progressInput.type = "text";
     progressInput.placeholder = "add progress";
+    progressInput.style.width = "0px";
     progressCol.appendChild(progressInput);
     const progressInputButton = document.createElement("button");
+    progressInputButton.id = "update-btn";
     progressInputButton.classList.add("btn", "btn-dark", "btn-sm");
     progressInputButton.textContent = "+";
+    progressInputButton.dataset.hid = habitData._id;
     progressCol.appendChild(progressInputButton);
     tbody.appendChild(progressRow);
 

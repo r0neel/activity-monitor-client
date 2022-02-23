@@ -93,11 +93,22 @@ function navLinkEvent(page){
     }
 }
 
+function toggleUpdateInput(){
+    const input = document.querySelector("#update-prog-input");
+    input.value = "";
+    if(input.style.width === "0px") {
+        input.style.width = "125px";
+        input.focus();
+    } else {
+        input.style.width = "0px";
+    }
+}
+
 const testingExports = {
     showForm, isLoggedIn
 };
 
 module.exports = {
-    showLoginForm, showRegisterForm, showNewHabitForm, showHabits, showHabitInfo, showHome, updateNavigation, decodeToken, navLinkEvent, showDashboard, 
+    showLoginForm, showRegisterForm, showNewHabitForm, showHabits, showHabitInfo, showHome, updateNavigation, decodeToken, navLinkEvent, showDashboard, toggleUpdateInput, 
     ...testingExports
 };
