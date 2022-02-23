@@ -461,6 +461,44 @@ function renderHabitInfo(habitData){
     streakRow.appendChild(streakCol);
     tbody.appendChild(streakRow);
 
+    // time until reset display row
+    const resetRow = document.createElement("tr");
+    const resetLabelCol = document.createElement("td");
+    resetLabelCol.textContent = "Next reset";
+    resetRow.appendChild(resetLabelCol);
+    const resetCol = document.createElement("td");
+    resetCol.textContent = `${habitData.timeUntilReset}`;
+    resetRow.appendChild(resetCol);
+    tbody.appendChild(resetRow);
+
+    // consistency bar display row
+    const consistencyBarRow = document.createElement("tr");
+    const consistencyBarLabelCol = document.createElement("td");
+    consistencyBarLabelCol.textContent = "Consistency";
+    consistencyBarRow.appendChild(consistencyBarLabelCol);
+
+    const consistencyCol = document.createElement("td");
+    consistencyCol.classList.add("align-middle");
+    consistencyBarRow.appendChild(consistencyCol);
+
+    const consistencyContainer = document.createElement("div");
+    consistencyContainer.classList.add("progress");
+    consistencyCol.appendChild(consistencyContainer);
+
+    habitData.consistency.forEach(segment => {
+        const consistencyBar = document.createElement("div");
+        consistencyBar.classList.add("progress-bar");
+        consistencyBar.role = "progressbar";
+        consistencyBar.setAttribute("aria-valuenow", segment.length);
+        consistencyBar.setAttribute("aria-valuemin", 0);
+        consistencyBar.setAttribute("aria-valuemax", 100);
+        consistencyBar.style.width = `${segment.length}%`;
+        consistencyBar.style.backgroundColor = segment.color;
+        consistencyContainer.appendChild(consistencyBar);
+    });
+
+    tbody.appendChild(consistencyBarRow);
+
     return container;
 }
 

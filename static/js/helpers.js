@@ -113,7 +113,9 @@ function habitDataWrapper(habitData){
         durationAsString: durationToString(habitData.duration),
         streak: calculateStreak(habitData),
         progress,
-        progressPercentage: (progress / habitData.goal) * 100
+        progressPercentage: (progress / habitData.goal) * 100,
+        timeUntilReset: millisecondsToString(calculateReset(habitData)),
+        consistency: consistencyBars(habitData)
     };
 }
 
@@ -140,6 +142,15 @@ function calculateStreak(habitData){
     return streak;
 }
 
+function consistencyBars(habitData){
+    let history = calculateHistoryTotals(habitData);
+    let unitPercentage = 100 / history.length;
+    return history.map(entry => ({
+        length: unitPercentage,
+        color: entry > 0 ? "#0d6efd" : "#00000000"
+    }));
+}
+
 function calculateProgress(habitData){
     let history = calculateHistoryTotals(habitData);
     return history[history.length - 1];
@@ -156,6 +167,25 @@ function durationToString(time){
     let stringDuration = durations.find(d => d[1] === time);
     if(!stringDuration) throw new Error("Invalid goal duration.");
     return stringDuration[0];
+}
+
+function calculateReset(habitData){
+    const now = Date.now();
+    let interval = habitData.creationDate;
+    while(now - interval >= 0) interval += habitData.duration;
+    return interval - now;
+}
+
+function millisecondsToString(t){
+    t = Math.trunc(t / 6e4);
+    let minutes = t % 60;
+    let hours = Math.trunc(t % (60 * 24) / 60);
+    let days = Math.trunc(t / (60 * 24));
+    let string = "";
+    if(days) string += `${days} day${days === 1 ? "" : "s"} `;
+    if(hours) string += `${hours} hour${hours === 1 ? "" : "s"} `;
+    string += `${minutes} minute${minutes === 1 ? "" : "s"} `;
+    return string.trim();
 }
 
 const testingExports = {
