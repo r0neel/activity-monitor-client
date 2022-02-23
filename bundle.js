@@ -358,11 +358,11 @@ function calculateProgress(habitData){
 
 function durationToString(time){
     const durations = [
-        ["hours", 3600000], 
-        ["days", 86400000], 
-        ["weeks", 604800000], 
-        ["months", 2419200000], 
-        ["years", 31536000000]
+        ["hour", 3600000], 
+        ["day", 86400000], 
+        ["week", 604800000], 
+        ["month", 2419200000], 
+        ["year", 31536000000]
     ];
     let stringDuration = durations.find(d => d[1] === time);
     if(!stringDuration) throw new Error("Invalid goal duration.");
@@ -667,11 +667,11 @@ function renderNewHabitForm(){
     goalDurationSelect. classList.add("form-select");
 
     const goalDurationArray = [
-        ["hours", 3600000], 
-        ["days", 86400000], 
-        ["weeks", 604800000], 
-        ["months", 2419200000], 
-        ["years", 31536000000]
+        ["hour", 3600000], 
+        ["day", 86400000], 
+        ["week", 604800000], 
+        ["month", 2419200000], 
+        ["year", 31536000000]
     ];
 
     goalDurationArray.forEach(unit => {
