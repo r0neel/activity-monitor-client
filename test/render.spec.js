@@ -17,7 +17,7 @@ describe("render functions", () => {
         });
 
 
-        heading = content.firstChild.firstChild
+         const heading = content.firstChild.firstChild
                 // = content.children[1]
 
         it("<h1> element returned for heading", () => {
@@ -40,7 +40,7 @@ describe("render functions", () => {
             expect(heading.innerHTML).toBe("TRACK YOUR <br> HABITS!");
         });
 
-        headingContainer = content.children[1]
+        const headingContainer = content.children[1]
 
         it("<div> element returned for headingContainer", () => {
             expect(headingContainer.tagName).toBe('DIV')
@@ -54,7 +54,7 @@ describe("render functions", () => {
             expect(content.children.length).toBe(4);
         });
 
-        container1h = content.children[1].children[0]
+        const container1h = content.children[1].children[0]
 
         it("container1h has innerHTML of What is Activity Monitor?", () => {
             expect(container1h.innerHTML).toBe("What is Activity Monitor?");
@@ -76,7 +76,7 @@ describe("render functions", () => {
             expect(container1h.children.length).toBe(0);
         });
 
-        container1p = content.children[1].children[1].children[0]
+        const container1p = content.children[1].children[1].children[0]
 
         it("container1p has innerHTML contaning long text beginning with Activity monitor is a webpage", () => {
             expect(container1p.innerHTML).toBe("Activitiy monitor is a webpage that allows anyone to track their personal habits. <br>We hope that Activity Monitor can aid in helping users remain accountable for habits <br>and to promote a positive lifestyle and reach their goals.");
@@ -94,7 +94,7 @@ describe("render functions", () => {
             expect(container1p.children.length).toBe(2);
         });
 
-        container2h = content.children[2].children[0]
+        const container2h = content.children[2].children[0]
 
         it("container2h has innerHTML of What am I able to track?", () => {
             expect(container2h.innerHTML).toBe("What am I able to track?");
@@ -117,7 +117,7 @@ describe("render functions", () => {
             expect(container2h.children.length).toBe(0);
         });
 
-        container2p = content.children[2].children[1].children[0]
+        const container2p = content.children[2].children[1].children[0]
 
         it("container2p has innerHTML contaning long text beginning with Anything! Activity Monitor is designed", () => {
             expect(container2p.innerHTML).toBe("Anything! Activity Monitor is designed for users to track whatever they wish <br>to track, being to studying a Japanese 1 hour a day, to wanting to lose 20 pounds <br> over 5 months. We have predefined units and timescales so you can spend less time <br> planning and more time completing your goals!.");
@@ -135,7 +135,7 @@ describe("render functions", () => {
             expect(container2p.children.length).toBe(3);
         });
 
-        container3h = content.children[3].children[0]
+        const container3h = content.children[3].children[0]
 
         it("container3h has innerHTML of Who made Activity Monitor?", () => {
             expect(container3h.innerHTML).toBe("Who made Activity Monitor?");
@@ -157,7 +157,7 @@ describe("render functions", () => {
             expect(container3h.children.length).toBe(0);
         })
 
-        container3p = content.children[3].children[1].children[0]
+        const container3p = content.children[3].children[1].children[0]
 
         it("container3p has innerHTML contaning long text beginning with Anything! Activity Monitor was desogmed, created", () => {
             expect(container3p.innerHTML).toBe("Activity Monitor was designed, created and deployed as a collaborative group project <br> as part of lap 2 of the training course of futureproof. The project occured over the <br> the span of 1 week and was created by team Ultra-Instinct.");
@@ -197,7 +197,7 @@ describe("render functions", () => {
             expect(form.classList.contains('login-form')).toBe(true);
         });
 
-        emailLabel = form.firstChild.firstChild
+         const emailLabel = form.firstChild.firstChild
                 // = content.children[1]
 
         it("<label> element returned for emailLabel", () => {
@@ -216,7 +216,7 @@ describe("render functions", () => {
             expect(emailLabel.innerHTML).toBe("Email:");
         });
 
-        emailInput = form.firstChild.children[1]
+        const emailInput = form.firstChild.children[1]
 
         it("<input> element returned for emailInput", () => {
             expect(emailInput.tagName).toBe('INPUT')
@@ -234,18 +234,18 @@ describe("render functions", () => {
             expect(emailInput.name).toBe("email");
         });
 
-        div1 = form.firstChild
+        const div1 = form.firstChild
 
         it("div1 has 2 children", () => {
             expect(div1.children.length).toBe(2);
         });
 
 
-        passwordLabel = form.children[1].firstChild
+        const passwordLabel = form.children[1].firstChild
 
-        // it("<label> element returned for passwordLabel", () => {
-        //     expect(emailInput.tagName).toBe('LABEL')
-        // })
+        it("<label> element returned for passwordLabel", () => {
+            expect(passwordLabel.tagName).toBe('LABEL')
+        })
         
         it("passwordLabel returned for to be passwordLogin", () => {
             expect(passwordLabel.for).toBe('passwordLogin')
@@ -259,7 +259,7 @@ describe("render functions", () => {
             expect(passwordLabel.innerHTML).toBe("Password:");
         });
 
-        passwordInput = form.children[1].children[1]
+        const passwordInput = form.children[1].children[1]
 
         it("<input> element returned for passwordInput", () => {
             expect(passwordInput.tagName).toBe('INPUT')
@@ -277,13 +277,13 @@ describe("render functions", () => {
             expect(passwordInput.name).toBe("password");
         });
 
-        div2 = form.children[1]
+        const div2 = form.children[1]
 
         it("div2 has 2 children", () => {
             expect(div2.children.length).toBe(2);
         });
 
-        submitInput = form.children[2].children[0]
+        const submitInput = form.children[2].children[0]
 
         it("<input> element returned for submitInput", () => {
             expect(submitInput.tagName).toBe('INPUT')
@@ -309,11 +309,234 @@ describe("render functions", () => {
             expect(submitInput.value).toBe("Log In");
         });
 
-        div3 = form.children[2]
+        const div3 = form.children[2]
 
         it("div3 has 1 child", () => {
             expect(div3.children.length).toBe(1);
         });
     });
 
+    describe("renderRegisterForm", () => {
+
+        const form2 = render.renderRegisterForm();
+
+        it("<form> element returned for form2", () => {
+            expect(form2.tagName).toBe('FORM')
+        })
+
+        it("form2 has id of register-form", () => {
+            expect(form2.id).toBe("register-form");
+        });
+
+        it('return element has correct class of text-center for form2', () => {
+            expect(form2.classList.contains('text-center')).toBe(true);
+        });
+
+        it('return element has correct class of login-form for form2', () => {
+            expect(form2.classList.contains('login-form')).toBe(true);
+        });
+
+        const emailLabel = form2.firstChild.firstChild
+                // = content.children[1]
+
+        it("<label> element returned for emailLabel", () => {
+            expect(emailLabel.tagName).toBe('LABEL')
+        })
+        
+        it("emailLabel returned for  to be emailRegister", () => {
+            expect(emailLabel.for).toBe('emailRegister')
+        })
+
+        it('return element has correct class of form-label for emailLabel', () => {
+            expect(emailLabel.classList.contains('form-label')).toBe(true);
+        });
+
+        it("emailLabel has innerHTML of Email:", () => {
+            expect(emailLabel.innerHTML).toBe("Email:");
+        });
+
+        const emailInput = form2.firstChild.children[1]
+
+        it("<input> element returned for emailInput", () => {
+            expect(emailInput.tagName).toBe('INPUT')
+        })
+        
+        it("emailInput returned type to be text", () => {
+            expect(emailInput.type).toBe('text')
+        });
+        
+        it("emailLabel has id of emailRegister", () => {
+            expect(emailInput.id).toBe("emailRegister");
+        });
+
+        it("emailLabel has innerHTML of Email:", () => {
+            expect(emailInput.name).toBe("email");
+        });
+
+        const div1 = form2.firstChild
+
+        it("div1 has 2 children", () => {
+            expect(div1.children.length).toBe(2);
+        });
+
+        const usernameLabel = form2.children[1].firstChild
+        // = content.children[1]
+
+        it("<label> element returned for usernameLabel", () => {
+            expect(usernameLabel.tagName).toBe('LABEL')
+        })
+        
+        it("usernameLabel returned for  to be emailRegister", () => {
+            expect(usernameLabel.for).toBe('usernameRegister')
+        })
+
+        it('return element has correct class of form-label for usernameLabel', () => {
+            expect(usernameLabel.classList.contains('form-label')).toBe(true);
+        });
+
+        it("usernameLabel has innerHTML of Email:", () => {
+            expect(usernameLabel.innerHTML).toBe("Username:");
+        });
+
+        const usernameInput = form2.children[1].children[1]
+
+        it("<input> element returned for usernameInput", () => {
+            expect(usernameInput.tagName).toBe('INPUT')
+        })
+        
+        it("usernameInput returned type to be text", () => {
+            expect(usernameInput.type).toBe('text')
+        });
+        
+        it("usernameInput has id of emailRegister", () => {
+            expect(usernameInput.id).toBe("usernameRegister");
+        });
+
+        it("usernameInput has innerHTML of Email:", () => {
+            expect(usernameInput.name).toBe("username");
+        });
+
+        const div2 = form2.firstChild
+
+        it("div1 has 2 children", () => {
+            expect(div2.children.length).toBe(2);
+        });
+
+        const passwordLabel = form2.children[2].firstChild
+
+        it("<label> element returned for passwordLabel", () => {
+            expect(passwordLabel.tagName).toBe('LABEL')
+        })
+        
+        it("passwordLabel returned for to be passwordRegister", () => {
+            expect(passwordLabel.for).toBe('passwordRegister')
+        });
+        
+        it('return element has correct class of form-label for passwordLabel', () => {
+            expect(passwordLabel.classList.contains('form-label')).toBe(true);
+        });
+
+        it("passwordLabel has innerHTML of Password:", () => {
+            expect(passwordLabel.innerHTML).toBe("Password:");
+        });
+
+        const passwordInput = form2.children[2].children[1]
+
+        it("<input> element returned for passwordInput", () => {
+            expect(passwordInput.tagName).toBe('INPUT')
+        })
+        
+        it("passwordInput returned type to be password", () => {
+            expect(passwordInput.type).toBe('password')
+        });
+        
+        it("passwordInput has id of passwordRegester", () => {
+            expect(passwordInput.id).toBe("passwordRegister");
+        });
+
+        it("passwordInput has innerHTML of password", () => {
+            expect(passwordInput.name).toBe("password");
+        });
+
+        const div3 = form2.children[2]
+
+        it("div2 has 2 children", () => {
+            expect(div2.children.length).toBe(2);
+        });
+
+        const passwordConfirmLabel = form2.children[3].firstChild
+
+        it("<label> element returned for passwordConfirmLabel", () => {
+            expect(passwordConfirmLabel.tagName).toBe('LABEL')
+        })
+        
+        it("passwordConfirmLabel returned for to be passwordConfirmRegister", () => {
+            expect(passwordConfirmLabel.for).toBe('passwordConfirmRegister')
+        });
+        
+        it('return element has correct class of form-label for passwordConfirmLabel', () => {
+            expect(passwordConfirmLabel.classList.contains('form-label')).toBe(true);
+        });
+
+        it("passwordConfirmLabel has innerHTML of Confirm Password:", () => {
+            expect(passwordConfirmLabel.innerHTML).toBe("Confirm password:");
+        });
+
+        const passwordConfirmInput = form2.children[3].children[1]
+
+        it("<input> element returned for passwordConfirmInput", () => {
+            expect(passwordConfirmInput.tagName).toBe('INPUT')
+        })
+        
+        it("passwordConfirmInput returned type to be password", () => {
+            expect(passwordConfirmInput.type).toBe('password')
+        });
+        
+        it("passwordConfirmInput has id of passwordConfirmRegister", () => {
+            expect(passwordConfirmInput.id).toBe("passwordConfirmRegister");
+        });
+
+        it("passwordConfirmInput has innerHTML of passwordConfirm", () => {
+            expect(passwordConfirmInput.name).toBe("passwordConfirm");
+        });
+
+        const div4 = form2.children[3]
+
+        it("div4 has 2 children", () => {
+            expect(div2.children.length).toBe(2);
+        });
+
+        const submitInput = form2.children[4].children[0]
+
+        it("<input> element returned for submitInput", () => {
+            expect(submitInput.tagName).toBe('INPUT')
+        })
+        
+        it("submitInput returned type to be submit", () => {
+            expect(submitInput.type).toBe('submit')
+        });
+
+        it('return element has correct class of btn for submitInput', () => {
+            expect(submitInput.classList.contains('btn')).toBe(true);
+        });
+
+        it('return element has correct class of btn-dark for submitInput', () => {
+            expect(submitInput.classList.contains('btn-dark')).toBe(true);
+        });
+        
+        it("submitInput has id of registerSubmit", () => {
+            expect(submitInput.id).toBe("registerSubmit");
+        });
+
+        it("submitInput has innerHTML of Sign Up", () => {
+            expect(submitInput.value).toBe("Sign Up");
+        });
+
+        const div5 = form2.children[4]
+
+        it("div5 has 2 children", () => {
+            expect(div3.children.length).toBe(2);
+        });
+        
+    });
 });
