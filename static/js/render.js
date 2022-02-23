@@ -185,6 +185,8 @@ function renderDashboard(){
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body");
     card.appendChild(cardBody);
+
+    return content;
 }
 
 function renderNewHabitForm(){
