@@ -39,7 +39,7 @@ function deleteUser(uid){
         try {
             const options = {
                 method: "DELETE",
-                headers: new Headers({'Authorization': localStorage.getItem('token')})
+                headers: new Headers({'Authorization': `Bearer ${localStorage.getItem('token')}`})
             }
             const response = await fetch(`${API_HOST}/users/${uid}`, options);
             if(response.status !== 204) throw new Error("Could not delete user.");
@@ -54,7 +54,7 @@ function getHabits(uid){
     return new Promise(async (resolve, reject) => {
         try {
             const options = {
-                headers: new Headers({'Authorization': localStorage.getItem('token')})
+                headers: new Headers({'Authorization': `Bearer ${localStorage.getItem('token')}`})
             }
             const response = await fetch(`${API_HOST}/users/${uid}/habits`, options);
             const json = await response.json();
@@ -72,7 +72,7 @@ function newHabit(uid, {habit, goal, unit, duration}){
             const options = {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                headers: new Headers({'Authorization': localStorage.getItem('token')}),
+                headers: new Headers({'Authorization': `Bearer ${localStorage.getItem('token')}`}),
                 body: JSON.stringify({ habit, goal, unit, duration })
             };
             const response = await fetch(`${API_HOST}/users/${uid}/habits`, options);
@@ -91,7 +91,7 @@ function updateHabit(uid, hid, {amount}){
             const options = {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
-                headers: new Headers({'Authorization': localStorage.getItem('token')}),
+                headers: new Headers({'Authorization': `Bearer ${localStorage.getItem('token')}`}),
                 body: JSON.stringify({ amount })
             };
             const response = await fetch(`${API_HOST}/users/${uid}/habits/${hid}`, options);
@@ -109,7 +109,7 @@ function deleteHabit(uid, hid){
         try {
             const options = {
                 method: "DELETE",
-                headers: new Headers({'Authorization': localStorage.getItem('token')})
+                headers: new Headers({'Authorization': `Bearer ${localStorage.getItem('token')}`})
             };
             const response = await fetch(`${API_HOST}/users/${uid}/habits/${hid}`, options);
             if(response.status !== 204) throw new Error("Could not delete habit.");
