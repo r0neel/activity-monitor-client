@@ -228,7 +228,7 @@ function renderNewHabitForm(){
     goalUnitSelect.id = "unitInput";
     goalUnitSelect.classList.add("form-select");
 
-    const goalUnitArray = ["times", "minutes", "hours","metres", "kilometres", "miles", "ounces", "cups", "millilitres", "litres", "pounds", "stones", "kilograms"];
+    const goalUnitArray = ["times", "minutes", "hours", "metres", "kilometres", "miles", "ounces", "cups", "millilitres", "litres", "pounds", "stones", "kilograms"];
 
     goalUnitArray.forEach(unit => {
         const goalUnitOption = document.createElement("option")
@@ -241,18 +241,25 @@ function renderNewHabitForm(){
     const goalDurationLabel = document.createElement("label");
     goalDurationLabel.for = "durationInput";
     goalDurationLabel.classList.add("form-label");
+    goalDurationLabel.textContent = "Goal duration:";
 
     const goalDurationSelect = document.createElement("select");
     goalDurationSelect.name = "duration";
     goalDurationSelect.id = "durationInput";
     goalDurationSelect. classList.add("form-select");
 
-    const goalDurationArray = ["hours", "days", "weeks", "months", "years"];
+    const goalDurationArray = [
+        ["hours", 3600000], 
+        ["days", 86400000], 
+        ["weeks", 604800000], 
+        ["months", 2419200000], 
+        ["years", 31536000000]
+    ];
 
     goalDurationArray.forEach(unit => {
         const goalDurationOption = document.createElement("option");
-        goalDurationOption.value = unit;
-        goalDurationOption.textContent = unit;
+        goalDurationOption.value = unit[1];
+        goalDurationOption.textContent = unit[0];
         
         goalDurationSelect.appendChild(goalDurationOption);
     })
