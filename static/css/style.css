@@ -4,7 +4,7 @@ body{
 }
 
 article{
-    padding: 3% 27%;
+    padding: 3%;
 }
 
 #trackerCard {
@@ -103,4 +103,10 @@ nav {
 #trackYourHabits {
     font-size: 60px;
     font-weight: 700;
+}
+
+@media screen and (min-width: 768px){
+    article{
+        padding: 3% 27%;
+    }
 }
