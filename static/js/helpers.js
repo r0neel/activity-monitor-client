@@ -147,7 +147,7 @@ function consistencyBars(habitData){
     let unitPercentage = 100 / history.length;
     return history.map(entry => ({
         length: unitPercentage,
-        color: entry > 0 ? "#0d6efd" : "#00000000"
+        color: entry >= habitData.goal ? "#0d6efd" : "#00000000"
     }));
 }
 
