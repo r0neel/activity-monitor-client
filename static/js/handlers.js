@@ -1,5 +1,5 @@
 const { login, register, getHabits, updateHabit, newHabit, deleteHabit } = require("./requests");
-const { showLoginForm, showRegisterForm, showHabits, showHome, updateNavigation, decodeToken, navLinkEvent, showNewHabitForm, showHabitInfo, showDashboard } = require("./helpers");
+const { showLoginForm, showRegisterForm, showHabits, showHome, updateNavigation, decodeToken, navLinkEvent, showNewHabitForm, showHabitInfo, showDashboard, toggleUpdateInput } = require("./helpers");
 
 let habitsData = [];
 
@@ -79,12 +79,16 @@ async function navLinkHandler(e){
                     habitsData = await getHabits(uid);
                     console.log(habitsData);
                     showDashboard();
+
                     const habitList = showHabits(habitsData);
-                    // to-do: add click event listeners
+                    const rows = habitList.querySelectorAll("tbody > tr");
+                    rows.forEach(row => {
+                        row.addEventListener("click", habitClickHandler);
+                    });
+
                     const habitForm = showNewHabitForm();
                     habitForm.addEventListener("submit", habitSubmitHandler);
                 } catch (err) {
-                    console.log(err);
                     localStorage.removeItem("token");
                     navLinkHandler(e);
                     return;
@@ -106,9 +110,13 @@ async function navLinkHandler(e){
 }
 
 function habitClickHandler(e){
-    const hid = e.target.dataset.hid;
-    const habitData = habitsData.find(habit => habit.id === hid);
-    showHabitInfo(habitData);
+    const hid = e.target.parentElement.dataset.hid;
+    const habitData = habitsData.find(habit => habit._id === hid);
+    const habitInfo = showHabitInfo(habitData);
+    const delBtn = habitInfo.querySelector("#delete-btn");
+    delBtn.addEventListener("click", habitDeleteBtnHandler);
+    const updateBtn = habitInfo.querySelector("#update-btn");
+    updateBtn.addEventListener("click", habitUpdateHandler);
 }
 
 function newHabitClickHandler(e){
@@ -118,18 +126,32 @@ function newHabitClickHandler(e){
 
 async function habitUpdateHandler(e){
     e.preventDefault();
-    try {
-        const { uid } = decodeToken();
-        const hid = e.target.dataset.hid;
-        const formData = new FormData(e.target);
-        const updatedHabit = await updateHabit(uid, hid, Object.fromEntries(formData));
-        
-        let habitData = habitsData.find(habit => habit.id === hid);
-        habitData.history = updatedHabit.history;
-        e.target.click(); // to-do: select habit list item
-    } catch (err) {
-        // can't update habit progress
-        console.warn(err);
+    const input = e.target.previousElementSibling;
+    const value = input.value.trim();
+    if(value){
+        try {
+            const progress = parseInt(value);
+            if(isNaN(progress)) throw new Error("Amount must be a number.");
+            if(progress <= 0) throw new Error("Amount must be positive.");
+            const { uid } = decodeToken();
+            const hid = e.target.dataset.hid;
+            const updatedHabit = (await updateHabit(uid, hid, {progress})).value;
+            
+            let habitData = habitsData.find(habit => habit._id === hid);
+            habitData.history = updatedHabit.history;
+            habitClickHandler({
+                target: {
+                    parentElement: {
+                        dataset: { hid }
+                    }
+                }
+            });
+        } catch (err) {
+            // can't update habit progress
+            console.warn(err);
+        }
+    } else {
+        toggleUpdateInput();
     }
 }
 
