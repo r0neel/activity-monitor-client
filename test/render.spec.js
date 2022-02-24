@@ -1316,17 +1316,484 @@ describe("render functions", () => {
     //     })
     // });
 
-    // describe("renderHabitInfo", () => {
+    //     describe("renderHabitInfo", () => {
 
-    //         const container = render.renderHabitInfo();
-        
-    //         it("<div> element returned for container", () => {
-    //             expect(container.tagName).toBe('DIV')
+    //             const container = render.renderHabitInfo();
+            
+    //             it("<div> element returned for container", () => {
+    //                 expect(container.tagName).toBe('DIV')
     //             })
 
-    //         it("container has id of habit-list", () => {
-    //             expect(container.classList.contains('card-body')).toBe(true);
+
+    //             it("container has id of habit-list", () => {
+    //                 expect(container.classList.contains('card-body')).toBe(true);
     //             });
 
+                
+    //             it("container has innerHTML of <h2>Stats</h2>", () => {
+    //                 expect(container.innerHTML).toBe("<h2>Stats</h2>");
+    //              });
+
+    //              const delBtn = container.children[1]
+
+    //              it("<button> element returned for delBtn", () => {
+    //                  expect(delBtn.tagName).toBe('BUTTON')
+    //              })
+     
+    //              it("delBtn returned id to be delete-btn", () => {
+    //                  expect(delBtn.id).toBe('delete-btn')
+    //              });
+                 
+    //              it('return element has correct class of btn for delBtn', () => {
+    //                  expect(delBtn.classList.contains('btn')).toBe(true);
+    //              });
+
+    //              it('return element has correct class of btn-danger for delBtn', () => {
+    //                 expect(delBtn.classList.contains('btn-danger')).toBe(true);
+    //             });
+
+    //             it("delBtn has dataset to be true", () => {
+    //                 expect(delBtn.dataset).toBe(true);
+    //             });
+     
+    //              it("delBtn has innerHTML of Habit", () => {
+    //                  expect(delBtn.innerHTML).toBe("Habit");
+    //              });
+
+    //              it("delBtn has 0 children", () => {
+    //                 expect(delBtn.children.length).toBe(0);
+    //             });
+
+    //             const table2 = container.children[2]
+    //             const tbody2 = container.children[2].children[0]
+
+
+    //             it("<table> element returned for table2", () => {
+    //                 expect(table2.tagName).toBe('TABLE')
+    //             })
+
+    //             it("<tbody> element returned for tbody2", () => {
+    //                 expect(tbody2.tagName).toBe('TBODY')
+    //             })
+                
+    //             it('return element has correct class of table for table2', () => {
+    //                 expect(table2.classList.contains('table')).toBe(true);
+    //             });
+
+    //             it('return element has correct class of table-striped for table2', () => {
+    //                expect(table2.classList.contains('table-striped')).toBe(true);
+    //            });
+
+    //             it("table2 has 0 children", () => {
+    //                expect(table2.children.length).toBe(0);
+    //            });
+               
+    //            it("tbody2 has 0 children", () => {
+    //             expect(tbody2.children.length).toBe(0);
+    //         });
+
+    //         const habitRow = container.children[2].children[0].children[0]
+    //         const habitLabelCol = container.children[2].children[0].children[0].children[0]
+
+
+    //         it("<tr> element returned for habitRow", () => {
+    //             expect(habitRow.tagName).toBe('TR')
+    //         })
+
+    //         it("<td> element returned for habitLabelCol", () => {
+    //             expect(habitLabelCol.tagName).toBe('TD')
+    //         })
+            
+    //         it("habitLabelCol has innerHTML of Habit", () => {
+    //             expect(habitLabelCol.innerHTML).toBe("Habit");
+    //          });
+
+    //          it("habitLabelCol has 0 children", () => {
+    //             expect(habitLabelCol.children.length).toBe(0);
+    //         });
+
+    //         const habitCol = container.children[2].children[0].children[0].children[1]
+
+            
+    //         it("<td> element returned for habitCol", () => {
+    //             expect(habitCol.tagName).toBe('TD')
+    //         })
+            
+    //         it("habitCol has innerHTML of true", () => {
+    //             expect(habitCol.innerHTML).toBe(true);
+    //          });
+
+    //          it("habitRow has 0 children", () => {
+    //             expect(habitRow.children.length).toBe(0);
+    //         });
+
+    //         it("habitCol has 0 children", () => {
+    //             expect(habitCol.children.length).toBe(0);
+    //         });
+
+    //         const progressRow = container.children[2].children[0].children[2].children
+    //         const progressLabelCol = container.children[2].children[0].children[2].children[0]
+
+
+    //         it("<tr> element returned for progressRow", () => {
+    //             expect(progressRow.tagName).toBe('TR')
+    //         })
+
+    //         it("<td> element returned for progressLabelCol", () => {
+    //             expect(progressLabelCol.tagName).toBe('TD')
+    //         })
+            
+    //         it("progressLabelCol has innerHTML of Progress", () => {
+    //             expect(progressLabelCol.innerHTML).toBe("Progress");
+    //          });
+
+    //          it('return element has correct class of align-middle for progressLabelCol', () => {
+    //             expect(progressLabelCol.classList.contains('align-middle')).toBe(true);
+    //         });
+
+    //          it("progressLabelCol has 0 children", () => {
+    //             expect(progressLabelCol.children.length).toBe(0);
+    //         });
+
+    //         const progressCol = container.children[2].children[0].children[2].children[1]
+
+            
+    //         it("<td> element returned for progressCol", () => {
+    //             expect(progressCol.tagName).toBe('TD')
+    //         })
+            
+    //         it("progressCol has innerHTML of true", () => {
+    //             expect(progressCol.innerHTML).toBe(true);
+    //          });
+
+    //          it("progressCol has 0 children", () => {
+    //             expect(progressCol.children.length).toBe(0);
+    //         });
+
+            
+    //         const progressInput = container.children[2].children[0].children[2].children[2]
+
+    //         it("<input> element returned for progressInput", () => {
+    //             expect(progressInput.tagName).toBe('INPUT')
+    //         })
+
+    //         it("progressInput returned type to be text", () => {
+    //             expect(progressInput.type).toBe('text')
+    //         });
+
+    //         it("progressInput has id of update-prog-text", () => {
+    //             expect(progressInput.id).toBe("update-prog-text");
+    //         });
+
+    //         it("progressInput has placeholder of add progress", () => {
+    //             expect(progressInput.placeholder).toBe("add progress");
+    //         });
+            
+    //         it('return element has correct class of form-control for progressInput', () => {
+    //             expect(progressInput.style.width.contains('0px')).toBe(true);
+    //         });
+
+    //         it("progressInput has 0 children", () => {
+    //             expect(progressInput.children.length).toBe(0);
+    //         });
+
+    //         const progressInputButton = container.children[2].children[0].children[2].children[3]
+
+    //          it("<button> element returned for progressInputButton", () => {
+    //                  expect(progressInputButton.tagName).toBe('BUTTON')
+    //          })
+     
+    //         it("progressInputButton returned id to be update-btn", () => {
+    //             expect(progressInputButton.id).toBe('update-btn')
+    //          });
+                 
+    //          it('return element has correct class of btn for progressInputButton', () => {
+    //              expect(progressInputButton.classList.contains('btn')).toBe(true);
+    //          });
+
+    //          it('return element has correct class of btn-dark for progressInputButton', () => {
+    //             expect(progressInputButton.classList.contains('btn-dark')).toBe(true);
+    //         });
+
+    //         it('return element has correct class of btn-sm for progressInputButton', () => {
+    //             expect(progressInputButton.classList.contains('btn-sm')).toBe(true);
+    //         });
+
+    //         it("progressInputButton has dataset to be true", () => {
+    //             expect(progressInputButton.dataset).toBe(true);
+    //         });
+     
+    //          it("progressInputButton has innerHTML of +", () => {
+    //              expect(progressInputButton.innerHTML).toBe("+");
+    //          });
+
+    //          it("progressInputButton has 0 children", () => {
+    //             expect(progressInputButton.children.length).toBe(0);
+    //         });
+
+    //         it("progressRow has 0 children", () => {
+    //             expect(progressRow.children.length).toBe(0);
+    //         });
+
+            
+    //         const goalRow = container.children[2].children[0].children[3]
+    //         const goalLabelCol = container.children[2].children[0].children[3].children[0]
+
+
+    //         it("<tr> element returned for goalRow", () => {
+    //             expect(goalRow.tagName).toBe('TR')
+    //         })
+
+    //         it("<td> element returned for goalLabelCol", () => {
+    //             expect(goalLabelCol.tagName).toBe('TD')
+    //         })
+            
+    //         it("goalLabelCol has innerHTML of Goal", () => {
+    //             expect(goalLabelCol.innerHTML).toBe("Goal");
+    //          });
+
+    //          it("goalLabelCol has 0 children", () => {
+    //             expect(goalLabelCol.children.length).toBe(0);
+    //         });
+
+    //         const goalCol = container.children[2].children[0].children[0].children[1]
+
+            
+    //         it("<td> element returned for goalCol", () => {
+    //             expect(goalCol.tagName).toBe('TD')
+    //         })
+            
+    //         it("goalCol has innerHTML of true", () => {
+    //             expect(goalCol.innerHTML).toBe(true);
+    //          });
+
+    //          it("goalRow has 0 children", () => {
+    //             expect(goalRow.children.length).toBe(0);
+    //         });
+
+    //         it("goalCol has 0 children", () => {
+    //             expect(goalCol.children.length).toBe(0);
+    //         });
+
+    //         const progbarRow = container.children[2].children[0].children[4]
+    //         const progBarLabelCol = container.children[2].children[0].children[4].children[0]
+
+
+    //         it("<tr> element returned for progbarRow", () => {
+    //             expect(progbarRow.tagName).toBe('TR')
+    //         })
+
+    //         it("<td> element returned for progBarLabelCol", () => {
+    //             expect(progBarLabelCol.tagName).toBe('TD')
+    //         })
+            
+    //         it("progBarLabelCol has innerHTML of Goal", () => {
+    //             expect(progBarLabelCol.innerHTML).toBe("Goal");
+    //          });
+
+    //          it("progBarLabelCol has 0 children", () => {
+    //             expect(progBarLabelCol.children.length).toBe(0);
+    //         });
+
+    //         const progCol = container.children[2].children[0].children[2].children[0]
+
+    //         it("<td> element returned for progCol", () => {
+    //             expect(progCol.tagName).toBe('TD')
+    //         })
+            
+    //          it('return element has correct class of align-middle for progCol', () => {
+    //             expect(progCol.classList.contains('align-middle')).toBe(true);
+    //         });
+
+    //          it("progCol has 0 children", () => {
+    //             expect(progCol.children.length).toBe(0);
+    //         });
+
+    //         const progContainer2 = container.children[2].children[0].children[2].children[1]
+
+    //         it("<div> element returned for progContainer2", () => {
+    //             expect(progContainer2.tagName).toBe('DIV')
+    //         })
+            
+    //          it('return element has correct class of progress for progContainer2', () => {
+    //             expect(progContainer2.classList.contains('progress')).toBe(true);
+    //         });
+
+    //          it("progContainer2 has 0 children", () => {
+    //             expect(progContainer2.children.length).toBe(0);
+    //         });
+
+    //         const progBar = container.children[2].children[0].children[2].children[2]
+    
+    //        it("<div> element returned for progBar", () => {
+    //            expect(progBar.tagName).toBe('DIV')
+    //        })
+
+    //        it('return element has correct class of progress-bar for progBar', () => {
+    //            expect(progBar.classList.contains('progress-bar')).toBe(true);
+    //        });
+
+    //        it("role of progressbar to be in progBar", () => {
+    //         expect(progBar.role).toBe('progressbar')
+    //         })
+
+    //         it("role of progressbar to be in progBar", () => {
+    //             expect(progBar.setAttribute).toBe('aria-valuenow')
+    //         })
+
+    //        it("progBar has 1 child", () => {
+    //            expect(progBar.children.length).toBe(1);
+    //        })
+
+    //        it("progbarRow has 1 child", () => {
+    //         expect(progbarRow.children.length).toBe(1);
+    //     })
+
+    //     const streakRow = container.children[2].children[0].children[5]
+    //     const streakLabelCol = container.children[2].children[0].children[5].children[0]
+
+
+    //     it("<tr> element returned for streakRow", () => {
+    //         expect(streakRow.tagName).toBe('TR')
+    //     })
+
+    //     it("<td> element returned for streakLabelCol", () => {
+    //         expect(streakLabelCol.tagName).toBe('TD')
+    //     })
+        
+    //     it("streakLabelCol has innerHTML of Streak", () => {
+    //         expect(streakLabelCol.innerHTML).toBe("Streak");
+    //      });
+
+    //      it("streakLabelCol has 0 children", () => {
+    //         expect(streakLabelCol.children.length).toBe(0);
+    //     });
+
+    //     const steakCol = container.children[2].children[0].children[5].children[1]
+
+        
+    //     it("<td> element returned for steakCol", () => {
+    //         expect(steakCol.tagName).toBe('TD')
+    //     })
+        
+    //     it("steakCol has innerHTML of true", () => {
+    //         expect(steakCol.innerHTML).toBe(true);
+    //      });
+
+    //      it("streakRow has 0 children", () => {
+    //         expect(streakRow.children.length).toBe(0);
+    //     });
+
+    //     it("steakCol has 0 children", () => {
+    //         expect(steakCol.children.length).toBe(0);
+    //     });
+
+    //     const resetRow = container.children[2].children[0].children[6]
+    //     const resetLabelCol = container.children[2].children[0].children[6].children[0]
+
+
+    //     it("<tr> element returned for resetRow", () => {
+    //         expect(resetRow.tagName).toBe('TR')
+    //     })
+
+    //     it("<td> element returned for resetLabelCol", () => {
+    //         expect(resetLabelCol.tagName).toBe('TD')
+    //     })
+        
+    //     it("resetLabelCol has innerHTML of New reset", () => {
+    //         expect(resetLabelCol.innerHTML).toBe("New reset");
+    //      });
+
+    //      it("resetLabelCol has 0 children", () => {
+    //         expect(resetLabelCol.children.length).toBe(0);
+    //     });
+
+    //     const resetCol = container.children[2].children[0].children[6].children[1]
+
+        
+    //     it("<td> element returned for resetCol", () => {
+    //         expect(resetCol.tagName).toBe('TD')
+    //     })
+        
+    //     it("resetCol has innerHTML of true", () => {
+    //         expect(resetCol.innerHTML).toBe(true);
+    //      });
+
+    //      it("resetRow has 0 children", () => {
+    //         expect(resetRow.children.length).toBe(0);
+    //     });
+
+    //     it("resetCol has 0 children", () => {
+    //         expect(resetCol.children.length).toBe(0);
+    //     });
+
+    //     const consistencyBarRow = container.children[2].children[0].children[6].children[1]
+    //     const consistencyBarLabelCol = container.children[2].children[0].children[6].children[1]
+
+        
+    //     it("<tr> element returned for consistencyBarRow", () => {
+    //         expect(consistencyBarRow.tagName).toBe('TR')
+    //     })
+        
+    //     it("<td> element returned for consistencyBarLabelCol", () => {
+    //         expect(consistencyBarLabelCol.tagName).toBe('TD')
+    //     })
+    //     it("consistencyBarLabelCol has innerHTML of true", () => {
+    //         expect(consistencyBarLabelCol.innerHTML).toBe(true);
+    //      });
+
+    //      it("consistencyBarLabelCol has 0 children", () => {
+    //         expect(consistencyBarLabelCol.children.length).toBe(0);
+    //     });
+
+    //     const consistencyCol = container.children[2].children[0].children[6].children[1]
+
+    //     it("<td> element returned for consistencyCol", () => {
+    //         expect(consistencyCol.tagName).toBe('TD')
+    //     })
+
+    //     it('return element has correct class of align-middle for consistencyCol', () => {
+    //         expect(consistencyCol.classList.contains('align-middle')).toBe(true);
+    //     });
+
+    //      it("consistencyCol has 0 children", () => {
+    //         expect(consistencyCol.children.length).toBe(0);
+    //     });
+
+    //     const consistencyContainer = container.children[2].children[0].children[6].children[1]
+
+    //     it("<div> element returned for consistencyContainer", () => {
+    //         expect(consistencyContainer.tagName).toBe('DIV')
+    //     })
+
+    //     it('return element has correct class of progress for consistencyContainer', () => {
+    //         expect(consistencyContainer.classList.contains('progress')).toBe(true);
+    //     });
+
+    //      it("consistencyContainer has 0 children", () => {
+    //         expect(consistencyContainer.children.length).toBe(0);
+    //     });
+
+    //     const consistencyBar = container.children[2].children[0].children[6].children[1]
+
+    //     it("<div> element returned for consistencyBar", () => {
+    //         expect(consistencyBar.tagName).toBe('DIV')
+    //     })
+
+    //     it('return element has correct class of progress-bar for consistencyBar', () => {
+    //         expect(consistencyBar.classList.contains('progress-bar')).toBe(true);
+    //     });
+
+    //     it("progressbar role returned for consistencyBar", () => {
+    //         expect(consistencyBar.role).toBe('progressbar')
+    //     })
+
+    //      it("consistencyBar has 0 children", () => {
+    //         expect(consistencyBar.children.length).toBe(0);
+    //     });
+
+    //     it("consistencyBarRow has 0 children", () => {
+    //         expect(consistencyBarRow.children.length).toBe(0);
+    //     });
     // });
 });
