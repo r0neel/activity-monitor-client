@@ -15,7 +15,7 @@ function showDashboard(){
 }
 
 function showHabits(habitData){
-    habitData = habitData.map(habitDataWrapper);
+    habitData = habitData.map(module.exports.habitDataWrapper);
     const newHabitList = renderHabitList(habitData);
     const habitList = document.querySelector("#habit-list");
     habitList.replaceWith(newHabitList);
@@ -23,7 +23,7 @@ function showHabits(habitData){
 }
 
 function showHabitInfo(habitData){
-    habitData = habitDataWrapper(habitData);
+    habitData = module.exports.habitDataWrapper(habitData);
     const newInfo = renderHabitInfo(habitData);
     const cardBody = document.querySelector(".card-body");
     cardBody.replaceChildren(newInfo);
@@ -189,7 +189,7 @@ function millisecondsToString(t){
 }
 
 const testingExports = {
-    showForm, isLoggedIn
+    showForm, isLoggedIn, habitDataWrapper
 };
 
 module.exports = {

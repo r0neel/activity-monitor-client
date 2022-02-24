@@ -45,25 +45,39 @@ describe("Helper functions (updating the DOM)", () => {
             return newList;
         });
 
+        jest.spyOn(helpers, "habitDataWrapper").mockImplementation(o => ({
+            ...o, extra: 1
+        }));
+
         beforeEach(() => {
             document.documentElement.innerHTML = "<div id='habit-list'></div>";
         });
+        
+        const mockData = [{foo: "bar"}, {foo: "baz"}];
 
-        it("calls render.renderHabitList with habit data", () => {
-            const mockData = {foo: "bar"};
+        it("calls habitDataWrapper with habit data", () => {
             helpers.showHabits(mockData);
-            expect(render.renderHabitList).toBeCalledWith(mockData);
+            for(let i = 0; i < mockData.length; i++){
+                expect(helpers.habitDataWrapper).nthCalledWith(i + 1, mockData[i], i, mockData);
+            }
+            expect(helpers.habitDataWrapper).toBeCalledTimes(mockData.length);
+        });
+
+        it("calls render.renderHabitList with pre-processed habit data", () => {
+            const wrappedData = mockData.map(helpers.habitDataWrapper);
+            helpers.showHabits(mockData);
+            expect(render.renderHabitList).toBeCalledWith(wrappedData);
         });
 
         it("replaces habit list with rendered element", () => {
-            helpers.showHabits();
+            helpers.showHabits(mockData);
             const newList = document.querySelector("div");
             const expectedElement = render.renderHabitList();
             expect(newList).toEqual(expectedElement);
         });
 
         it("returns rendered element", () => {
-            const newList = helpers.showHabits();
+            const newList = helpers.showHabits(mockData);
             const expectedElement = render.renderHabitList();
             expect(newList).toEqual(expectedElement);
         });
@@ -76,27 +90,38 @@ describe("Helper functions (updating the DOM)", () => {
             return newInfo;
         });
 
+        jest.spyOn(helpers, "habitDataWrapper").mockImplementation(o => ({
+            ...o, extra: 1
+        }));
+
         beforeEach(() => {
-            document.documentElement.innerHTML = "<div id='habit-info'></div>";
+            document.documentElement.innerHTML = "<div class='card-body'></div>";
         });
 
-        it("calls render.renderHabitInfo with habit data", () => {
-            const mockData = {foo: "bar"};
+        const mockData = {foo: "bar"};
+
+        it("calls habitDataWrapper with habit data", () => {
             helpers.showHabitInfo(mockData);
-            expect(render.renderHabitInfo).toBeCalledWith(mockData);
+            expect(helpers.habitDataWrapper).toBeCalledWith(mockData);
         });
 
-        it("replaces habit info with rendered element", () => {
+        it("calls render.renderHabitInfo with pre-processed habit data", () => {
+            const wrappedData = helpers.habitDataWrapper(mockData);
+            helpers.showHabitInfo(mockData);
+            expect(render.renderHabitInfo).toBeCalledWith(wrappedData);
+        });
+
+        it("replaces card body children with rendered element", () => {
             helpers.showHabitInfo();
-            const newList = document.querySelector("div");
+            const newInfo = document.querySelector("div.card-body > *");
             const expectedElement = render.renderHabitInfo();
-            expect(newList).toEqual(expectedElement);
+            expect(newInfo).toEqual(expectedElement);
         });
 
         it("returns rendered element", () => {
-            const newList = helpers.showHabitInfo();
+            const newInfo = helpers.showHabitInfo();
             const expectedElement = render.renderHabitInfo();
-            expect(newList).toEqual(expectedElement);
+            expect(newInfo).toEqual(expectedElement);
         });
     });
 
@@ -113,7 +138,7 @@ describe("Helper functions (updating the DOM)", () => {
         });
 
         beforeEach(() => {
-            document.documentElement.innerHTML = "<form></form>";
+            document.documentElement.innerHTML = '<div id="login-modal"><h3></h3><input class="form-check-input" type="checkbox" role="switch" id="form-toggle"><form></form></div><div class="card-body"></div>';
         });
 
         afterAll(() => {
@@ -126,6 +151,18 @@ describe("Helper functions (updating the DOM)", () => {
             it("calls render.renderLoginForm", () => {
                 helpers.showLoginForm();
                 expect(render.renderLoginForm).toBeCalled();
+            });
+
+            it("sets modal heading to 'Log In'", () => {
+                helpers.showLoginForm();
+                const heading = document.querySelector("#login-modal h3");
+                expect(heading.textContent).toBe("Log In");
+            });
+
+            it("sets form toggle switch to checked position", () => {
+                helpers.showLoginForm();
+                const toggle = document.querySelector("#form-toggle");
+                expect(toggle.checked).toBe(true);
             });
 
             it("calls showForm with rendered element", () => {
@@ -149,6 +186,18 @@ describe("Helper functions (updating the DOM)", () => {
                 expect(render.renderRegisterForm).toBeCalled();
             });
 
+            it("sets modal heading to 'Sign Up'", () => {
+                helpers.showRegisterForm();
+                const heading = document.querySelector("#login-modal h3");
+                expect(heading.textContent).toBe("Sign Up");
+            });
+
+            it("sets form toggle switch to unchecked position", () => {
+                helpers.showRegisterForm();
+                const toggle = document.querySelector("#form-toggle");
+                expect(toggle.checked).toBe(false);
+            });
+
             it("calls showForm with rendered element", () => {
                 helpers.showRegisterForm();
                 const expectedElement = render.renderRegisterForm();
@@ -165,15 +214,16 @@ describe("Helper functions (updating the DOM)", () => {
         describe("showNewHabitForm", () => {
             render.renderNewHabitForm.mockImplementation(mockRender);
 
-            it("calls render.renderRegisterForm", () => {
+            it("calls render.renderNewHabitForm", () => {
                 helpers.showNewHabitForm();
                 expect(render.renderNewHabitForm).toBeCalled();
             });
 
-            it("calls showForm with rendered element", () => {
+            it("sets card body children to rendered element", () => {
                 helpers.showNewHabitForm();
+                const newForm = document.querySelector(".card-body > *");
                 const expectedElement = render.renderNewHabitForm();
-                expect(helpers.showForm).toBeCalledWith(expectedElement);
+                expect(newForm).toEqual(expectedElement);
             });
 
             it("returns rendered element", () => {
