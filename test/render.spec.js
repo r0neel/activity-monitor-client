@@ -1016,8 +1016,8 @@ describe("render functions", () => {
                 expect(goalDurationArray0.value).toBe('3600000')
             });
 
-            it("goalDurationArray0 has innerHTML of hours", () => {
-                expect(goalDurationArray0.innerHTML).toBe("hours");
+            it("goalDurationArray0 has innerHTML of hour", () => {
+                expect(goalDurationArray0.innerHTML).toBe("hour");
             });
 
             const goalDurationArray1 = form.children[7].children[1]
@@ -1030,8 +1030,8 @@ describe("render functions", () => {
                 expect(goalDurationArray1.value).toBe('86400000')
             });
 
-            it("goalDurationArray1 has innerHTML of days", () => {
-                expect(goalDurationArray1.innerHTML).toBe("days");
+            it("goalDurationArray1 has innerHTML of day", () => {
+                expect(goalDurationArray1.innerHTML).toBe("day");
             });
 
             const goalDurationArray2 = form.children[7].children[2]
@@ -1044,8 +1044,8 @@ describe("render functions", () => {
                 expect(goalDurationArray2.value).toBe('604800000')
             });
 
-            it("goalDurationArray2 has innerHTML of weeks", () => {
-                expect(goalDurationArray2.innerHTML).toBe("weeks");
+            it("goalDurationArray2 has innerHTML of week", () => {
+                expect(goalDurationArray2.innerHTML).toBe("week");
             });
 
             const goalDurationArray3 = form.children[7].children[3]
@@ -1058,8 +1058,8 @@ describe("render functions", () => {
                 expect(goalDurationArray3.value).toBe('2419200000')
             });
 
-            it("goalDurationArray3 has innerHTML of months", () => {
-                expect(goalDurationArray3.innerHTML).toBe("months");
+            it("goalDurationArray3 has innerHTML of month", () => {
+                expect(goalDurationArray3.innerHTML).toBe("month");
             });
 
             const goalDurationArray4 = form.children[7].children[4]
@@ -1072,8 +1072,8 @@ describe("render functions", () => {
                 expect(goalDurationArray4.value).toBe('31536000000')
             });
 
-            it("goalDurationArray4 has innerHTML of years", () => {
-                expect(goalDurationArray4.innerHTML).toBe("years");
+            it("goalDurationArray4 has innerHTML of year", () => {
+                expect(goalDurationArray4.innerHTML).toBe("year");
             });
 
             const submitAddTracker = form.children[8]
@@ -1137,6 +1137,196 @@ describe("render functions", () => {
             it("submitAddTracker has 0 children", () => {
                 expect(submitAddTracker.children.length).toBe(0);
             });
-
     });
+
+    // describe("renderHabitList", () => {
+    //         const container = render.renderHabitList();
+        
+    //         it("<section> element returned for container", () => {
+    //             expect(container.tagName).toBe('SECTION')
+    //         })
+
+    //         it("container has id of habit-list", () => {
+    //             expect(container.id).toBe("habit-list");
+    //         });
+
+    //         const table = content.children[0]
+    
+    //         it("<table> element returned for table", () => {
+    //             expect(table.tagName).toBe('TABLE')
+    //         })
+
+    //         it('return element has correct class of table for table', () => {
+    //             expect(table.classList.contains('table')).toBe(true);
+    //         });
+
+    //         it('return element has correct class of table-striped for table', () => {
+    //             expect(table.classList.contains('table-striped')).toBe(true);
+    //         });
+
+    //         it("card has 1 child", () => {
+    //             expect(card.children.length).toBe(1);
+    //         });
+
+    //         const thead = content.children[1]
+    
+    //         it("<thead> element returned for thead", () => {
+    //             expect(thead.tagName).toBe('THEAD')
+    //         })
+
+    //         it("thead has 1 child", () => {
+    //             expect(thead.children.length).toBe(1);
+    //         });
+
+    //         const tr = content.children[1].children[0]
+    
+    //         it("<tr> element returned for tr", () => {
+    //             expect(tr.tagName).toBe('TR')
+    //         })
+
+    //         it('return element has correct class of table for tr', () => {
+    //             expect(tr.classList.contains('table')).toBe(true);
+    //         });
+
+    //         it("tr has 1 child", () => {
+    //             expect(tr.children.length).toBe(1);
+    //         });
+
+    //         const th0 = content.children[1].children[0].children[0]
+    
+    //         it("<th> element returned for th0", () => {
+    //             expect(th0.tagName).toBe('TR')
+    //         })
+
+    //         it('return element has correct class of table for th0', () => {
+    //             expect(th0.innerHTML).toBe("Habit");
+    //         });
+
+    //         it("th0 has 1 child", () => {
+    //             expect(th0.children.length).toBe(1);
+    //         });
+
+            
+    //         const th1 = content.children[1].children[0].children[1]
+    
+    //         it("<th> element returned for th1", () => {
+    //             expect(th1.tagName).toBe('TR')
+    //         })
+
+    //         it('return element has correct class of table for th1', () => {
+    //             expect(th1.innerHTML).toBe("Progress");
+    //         });
+
+    //         it("th1 has 1 child", () => {
+    //             expect(th1.children.length).toBe(1);
+    //         });
+
+    //         const th2 = content.children[1].children[0].children[2]
+    
+    //         it("<th> element returned for th2", () => {
+    //             expect(th2.tagName).toBe('TR')
+    //         })
+
+    //         it('return element has correct class of table for th2', () => {
+    //             expect(th2.innerHTML).toBe("Goal");
+    //         });
+
+    //         it("th2 has 1 child", () => {
+    //             expect(th2.children.length).toBe(1);
+    //         });
+
+    //         const th3 = content.children[1].children[0].children[3]
+    
+    //         it("<th> element returned for th3", () => {
+    //             expect(th3.tagName).toBe('TR')
+    //         })
+
+    //         it('return element has correct class of table for th3', () => {
+    //             expect(th3.innerHTML).toBe("Progression");
+    //         });
+
+    //         it("th3 has 1 child", () => {
+    //             expect(th3.children.length).toBe(1);
+    //         });
+
+    //         const tbody = content.children[2]
+    
+    //         it("<tbody> element returned for tbody", () => {
+    //             expect(tbody.tagName).toBe('TBODY')
+    //         })
+
+    //         it("tbody has 1 child", () => {
+    //             expect(tbody.children.length).toBe(1);
+    //         });
+
+    //        // // DONT KNOW HOW TO TEST LINE 319-339 IN render.js
+
+    //        const progCol = content.children[2].children[0].children[3]
+    
+    //        it("<td> element returned for progCol", () => {
+    //            expect(progCol.tagName).toBe('TD')
+    //        })
+
+    //        it('return element has correct class of align-middle for progCol', () => {
+    //            expect(progCol.classList.contains('align-middle')).toBe(true);
+    //        });
+
+    //        it("progCol has 1 child", () => {
+    //            expect(progCol.children.length).toBe(1);
+    //        })
+
+    //        const progContainer = content.children[2].children[0].children[3]
+    
+    //        it("<div> element returned for progContainer", () => {
+    //            expect(progContainer.tagName).toBe('DIV')
+    //        })
+
+    //        it('return element has correct class of progress for progContainer', () => {
+    //            expect(progContainer.classList.contains('progress')).toBe(true);
+    //        });
+
+    //        it("progContainer has 1 child", () => {
+    //            expect(progContainer.children.length).toBe(1);
+    //        })
+
+    //        const progBar = content.children[2].children[0].children[3]
+    
+    //        it("<div> element returned for progBar", () => {
+    //            expect(progBar.tagName).toBe('DIV')
+    //        })
+
+    //        it('return element has correct class of progress-bar for progBar', () => {
+    //            expect(progBar.classList.contains('progress-bar')).toBe(true);
+    //        });
+
+    //        it("role of progressbar to be in progBar", () => {
+    //         expect(progBar.role).toBe('progressbar')
+    //         })
+
+    //         it("role of progressbar to be in progBar", () => {
+    //             expect(progBar.setAttribute).toBe('aria-valuenow')
+    //         })
+
+    //        it("progBar has 1 child", () => {
+    //            expect(progBar.children.length).toBe(1);
+    //        })
+
+    //        it("tbody has 1 child", () => {
+    //         expect(tbody.children.length).toBe(1);
+    //     })
+    // });
+
+    // describe("renderHabitInfo", () => {
+
+    //         const container = render.renderHabitInfo();
+        
+    //         it("<div> element returned for container", () => {
+    //             expect(container.tagName).toBe('DIV')
+    //             })
+
+    //         it("container has id of habit-list", () => {
+    //             expect(container.classList.contains('card-body')).toBe(true);
+    //             });
+
+    // });
 });
