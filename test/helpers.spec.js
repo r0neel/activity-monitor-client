@@ -11,7 +11,8 @@ describe("Helper functions (updating the DOM)", () => {
     describe("showHome", () => {
         render.renderHome.mockImplementation(() => {
             let newContent = document.createElement("div");
-            newContent.id = "content-new";
+            newContent.id = "content";
+            newContent.textContent = "new content";
             return newContent;
         });
 
@@ -26,15 +27,46 @@ describe("Helper functions (updating the DOM)", () => {
 
         it("replaces content div with new content", () => {
             helpers.showHome();
-            const content = document.querySelector("div");
-            expect(content).toBeTruthy();
-            expect(content.id).toBe("content-new");
+            const expectedElement = render.renderHome();
+            const content = document.querySelector("#content");
+            expect(content).toEqual(expectedElement);
         });
 
-        it("returns html element containing new content", () => {
+        it("returns rendered element", () => {
             const newContent = helpers.showHome();
-            expect(newContent instanceof HTMLElement).toBe(true);
-            expect(newContent.id).toBe("content-new");
+            const expectedElement = render.renderHome();
+            expect(newContent).toEqual(expectedElement);
+        });
+    });
+
+    describe("showDashboard", () => {
+        render.renderDashboard.mockImplementation(() => {
+            let newContent = document.createElement("div");
+            newContent.id = "content";
+            newContent.textContent = "new content";
+            return newContent;
+        });
+
+        beforeEach(() => {
+            document.documentElement.innerHTML = "<div id='content'></div>";
+        });
+
+        it("calls render.renderDashboard", () => {
+            helpers.showDashboard();
+            expect(render.renderDashboard).toBeCalled();
+        });
+
+        it("replaces content div with new content", () => {
+            helpers.showDashboard();
+            const expectedElement = render.renderDashboard();
+            const content = document.querySelector("#content");
+            expect(content).toEqual(expectedElement);
+        });
+
+        it("returns rendered element", () => {
+            const newContent = helpers.showDashboard();
+            const expectedElement = render.renderDashboard();
+            expect(newContent).toEqual(expectedElement);
         });
     });
 
@@ -44,13 +76,14 @@ describe("Helper functions (updating the DOM)", () => {
             newList.id = "list-new";
             return newList;
         });
-
+        
         jest.spyOn(helpers, "habitDataWrapper").mockImplementation(o => ({
             ...o, extra: 1
         }));
 
         beforeEach(() => {
             document.documentElement.innerHTML = "<div id='habit-list'></div>";
+            jest.spyOn(helpers, "habitDataWrapper").mockClear();
         });
         
         const mockData = [{foo: "bar"}, {foo: "baz"}];
@@ -96,6 +129,7 @@ describe("Helper functions (updating the DOM)", () => {
 
         beforeEach(() => {
             document.documentElement.innerHTML = "<div class='card-body'></div>";
+            jest.spyOn(helpers, "habitDataWrapper").mockClear();
         });
 
         const mockData = {foo: "bar"};
@@ -341,6 +375,267 @@ describe("Helper functions (updating the DOM)", () => {
         it("returnValue.preventDefault() returns undefined", () => {
             const output = helpers.navLinkEvent("test");
             expect(output.preventDefault()).toBe(undefined);
+        });
+    });
+
+    describe("toggleUpdateInput", () => {
+        let input;
+        beforeEach(() => {
+            document.documentElement.innerHTML = "<input id='update-prog-input' type='text'/>";
+            input = document.querySelector("#update-prog-input");
+        });
+
+        it("clears the value of the input", () => {
+            input.value = "test value";
+            helpers.toggleUpdateInput();
+            expect(input.value).toBe("");
+        });
+
+        it("widens the input if there is no width initially", () => {
+            input.style.width = "0px";
+            helpers.toggleUpdateInput();
+            expect(parseInt(input.style.width.slice(0, -2))).toBeGreaterThan(0);
+        });
+
+        it("sets the width to 0px if it has width", () => {
+            input.style.width = "10px";
+            helpers.toggleUpdateInput();
+            expect(input.style.width).toBe("0px");
+        });
+    });
+
+    describe("habitDataWrapper", () => {
+        jest.spyOn(helpers, "calculateProgress").mockReturnValue(1);
+        jest.spyOn(helpers, "durationToString").mockReturnValue("day");
+        jest.spyOn(helpers, "calculateStreak").mockReturnValue(5);
+        jest.spyOn(helpers, "millisecondsToString").mockImplementation(t => t + "ms");
+        jest.spyOn(helpers, "calculateReset").mockReturnValue(1000);
+        jest.spyOn(helpers, "consistencyBars").mockReturnValue([{}, {}, {}, {}, {}]);
+
+        const mockData = {
+            duration: 123,
+            goal: 10
+        };
+
+        let newData;
+        beforeAll(() => {
+            jest.spyOn(helpers, "habitDataWrapper").mockRestore();
+            newData = helpers.habitDataWrapper(mockData);
+        });
+
+        afterAll(() => {
+            jest.clearAllMocks();
+        });
+
+        it("returns an object", () => {
+            expect(typeof newData).toBe("object");
+        });
+
+        it("keeps original properties intact", () => {
+            expect(newData).toMatchObject(mockData);
+        });
+
+        describe("adds the correct extra properties", () => {
+            it("durationAsString", () => {
+                expect(newData.durationAsString).toBe("day");
+            });
+
+            it("streak", () => {
+                expect(newData.streak).toBe(5);
+            });
+
+            it("progress", () => {
+                expect(newData.progress).toBe(1);
+            });
+
+            it("progressPercentage", () => {
+                const expectedPercentage = 100 / mockData.goal;
+                expect(newData.progressPercentage).toBe(expectedPercentage);
+            });
+
+            it("timeUntilReset", () => {
+                expect(newData.timeUntilReset).toBe("1000ms");
+            });
+
+            it("consistency", () => {
+                expect(newData.consistency).toEqual([{}, {}, {}, {}, {}]);
+            });
+        });
+    });
+
+    describe("calculateHistoryTotals", () => {
+        global.Date.now = () => 300;
+
+        const mockData = {
+            creationDate: 0,
+            duration: 100,
+            history: [
+                { time: 2, amount: 3},
+                { time: 23, amount: 2},
+                { time: 54, amount: 4},
+                { time: 153, amount: 6},
+                { time: 199, amount: 1},
+                { time: 200, amount: 3},
+                { time: 233, amount: 4}
+            ]
+        };
+
+        it("returns array with correct totals", () => {
+            const output = helpers.calculateHistoryTotals(mockData);
+            const expectedOutput = [9, 7, 7];
+            expect(output).toEqual(expectedOutput);
+        });
+    });
+
+    describe("calculateStreak", () => {
+        beforeAll(() => {
+            jest.spyOn(helpers, "calculateStreak").mockRestore();
+        });
+
+        const spy = jest.spyOn(helpers, "calculateHistoryTotals");
+
+        const mockData = {
+            goal: 5
+        };
+
+        it("calls calculateHistoryTotals with habitData", () => {
+            spy.mockReturnValue([]);
+            helpers.calculateStreak(mockData);
+            expect(helpers.calculateHistoryTotals).toBeCalledWith(mockData);
+        });
+
+        it("returns correct streak for incomplete day", () => {
+            spy.mockReturnValue([5, 5, 4, 2, 1, 0, 0, 5, 8, 5, 2]);
+            const streak = helpers.calculateStreak(mockData);
+            expect(streak).toBe(3);
+        });
+
+        it("returns correct streak for complete day", () => {
+            spy.mockReturnValue([5, 5, 4, 2, 1, 0, 0, 5, 8, 5, 6]);
+            const streak = helpers.calculateStreak(mockData);
+            expect(streak).toBe(4);
+        });
+    });
+
+    describe("consistencyBars", () => {
+        beforeAll(() => {
+            jest.spyOn(helpers, "consistencyBars").mockRestore();
+            jest.spyOn(helpers, "calculateHistoryTotals").mockReturnValue([5, 4, 5, 6, 1]);
+        });
+
+        const mockData = {
+            goal: 5
+        };
+
+        it("calls calculateHistoryTotals with habit data", () => {
+            helpers.consistencyBars(mockData);
+            expect(helpers.calculateHistoryTotals).toBeCalledWith(mockData);
+        })
+
+        it("returns the correct data", () => {
+            const bars = helpers.consistencyBars(mockData);
+            const expectedBars = [
+                { length: 20, color: "#0d6efd" },
+                { length: 20, color: "#00000000" },
+                { length: 20, color: "#0d6efd" },
+                { length: 20, color: "#0d6efd" },
+                { length: 20, color: "#00000000" }
+            ];
+            expect(bars).toEqual(expectedBars);
+        });
+    });
+
+    describe("calculateProgress", () => {
+        beforeAll(() => {
+            jest.spyOn(helpers, "calculateProgress").mockRestore();
+            jest.spyOn(helpers, "calculateHistoryTotals").mockReturnValue([5, 4, 5, 6, 1]);
+        });
+
+        const mockData = {
+            foo: "bar"
+        };
+
+        it("calls calculateHistoryTotals with habit data", () => {
+            helpers.calculateProgress(mockData);
+            expect(helpers.calculateHistoryTotals).toBeCalledWith(mockData);
+        });
+
+        it("return the last element of history totals", () => {
+            const progress = helpers.calculateProgress(mockData);
+            expect(progress).toBe(1);
+        });
+    });
+
+    describe("durationToString", () => {
+        beforeAll(() => {
+            jest.spyOn(helpers, "durationToString").mockRestore();
+        });
+
+        describe("returns the correct strings", () => {
+            it.each([
+                [3600000, "hour"], 
+                [86400000, "day"], 
+                [604800000, "week"], 
+                [2419200000, "month"], 
+                [31536000000, "year"]
+            ])("%i -> %s", (time, string) => {
+                const output = helpers.durationToString(time);
+                expect(output).toBe(string);
+            });
+        });
+
+        it("throws error for unaccepted time value", () => {
+            expect(() => {
+                helpers.durationToString(1);
+            }).toThrow();
+        });
+    });
+
+    describe("calculateReset", () => {
+        global.Date.now = () => 300;
+
+        beforeAll(() => {
+            jest.spyOn(helpers, "calculateReset").mockRestore();
+        });
+
+        it("returns correct time interval", () => {
+            const mockData = {
+                creationDate: 0,
+                duration: 1000
+            };
+            const output = helpers.calculateReset(mockData);
+            expect(output).toBe(700);
+        });
+
+        it("returns correct time interval at first millisecond of reset", () => {
+            const mockData = {
+                creationDate: 0,
+                duration: 300
+            };
+            const output = helpers.calculateReset(mockData);
+            expect(output).toBe(300);
+        });
+    });
+
+    describe("millisecondsToString", () => {
+        beforeAll(() => {
+            jest.spyOn(helpers, "millisecondsToString").mockRestore();
+        });
+        
+        describe("returns the correct strings", () => {
+            it.each([
+                [0, "0 minutes"],
+                [23564, "0 minutes"],
+                [64578, "1 minute"],
+                [2166666, "36 minutes"],
+                [5766666, "1 hour 36 minutes"],
+                [38166666, "10 hours 36 minutes"],
+                [124566666, "1 day 10 hours 36 minutes"],
+                [902166666, "10 days 10 hours 36 minutes"]
+            ])("%i -> %s", (time, string) => {
+                const output = helpers.millisecondsToString(time);
+                expect(output).toBe(string);
+            });
         });
     });
 });

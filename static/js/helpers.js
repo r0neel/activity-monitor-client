@@ -107,15 +107,17 @@ function toggleUpdateInput(){
 }
 
 function habitDataWrapper(habitData){
-    const progress = calculateProgress(habitData);
+    const progress = module.exports.calculateProgress(habitData);
     return {
         ...habitData,
-        durationAsString: durationToString(habitData.duration),
-        streak: calculateStreak(habitData),
+        durationAsString: module.exports.durationToString(habitData.duration),
+        streak: module.exports.calculateStreak(habitData),
         progress,
         progressPercentage: (progress / habitData.goal) * 100,
-        timeUntilReset: millisecondsToString(calculateReset(habitData)),
-        consistency: consistencyBars(habitData)
+        timeUntilReset: module.exports.millisecondsToString(
+                            module.exports.calculateReset(habitData)
+                        ),
+        consistency: module.exports.consistencyBars(habitData)
     };
 }
 
@@ -130,7 +132,7 @@ function calculateHistoryTotals(habitData){
 }
 
 function calculateStreak(habitData){
-    let history = calculateHistoryTotals(habitData);
+    let history = module.exports.calculateHistoryTotals(habitData);
     let streak = 0;
     for(let i = history.length - 1; i >= 0; i--){
         if(history[i] >= habitData.goal){
@@ -143,7 +145,7 @@ function calculateStreak(habitData){
 }
 
 function consistencyBars(habitData){
-    let history = calculateHistoryTotals(habitData);
+    let history = module.exports.calculateHistoryTotals(habitData);
     let unitPercentage = 100 / history.length;
     return history.map(entry => ({
         length: unitPercentage,
@@ -152,7 +154,7 @@ function consistencyBars(habitData){
 }
 
 function calculateProgress(habitData){
-    let history = calculateHistoryTotals(habitData);
+    let history = module.exports.calculateHistoryTotals(habitData);
     return history[history.length - 1];
 }
 
@@ -189,7 +191,7 @@ function millisecondsToString(t){
 }
 
 const testingExports = {
-    showForm, isLoggedIn, habitDataWrapper
+    showForm, isLoggedIn, habitDataWrapper, calculateProgress, calculateStreak, calculateReset, millisecondsToString, durationToString, consistencyBars, calculateHistoryTotals
 };
 
 module.exports = {
