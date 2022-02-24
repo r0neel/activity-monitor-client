@@ -70,6 +70,7 @@ The main idea behind the design of the client side was that it should be a singl
 - [x] Goal duration on habit form has string values instead of numbers.
 - [x] Login form doesn't close after logging in.
 - [x] Incorrect `Content-Type` headers on requests.
+- [x] Completion streak doesn't take into account current day.
 
 ## Pitfalls & Discoveries
 
