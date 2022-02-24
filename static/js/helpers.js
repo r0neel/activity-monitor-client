@@ -11,7 +11,7 @@ function showDashboard(){
     const newContent = renderDashboard();
     const content = document.querySelector("#content");
     content.replaceWith(newContent);
-    return content;
+    return newContent;
 }
 
 function showHabits(habitData){
@@ -133,8 +133,8 @@ function calculateHistoryTotals(habitData){
 
 function calculateStreak(habitData){
     let history = module.exports.calculateHistoryTotals(habitData);
-    let streak = 0;
-    for(let i = history.length - 1; i >= 0; i--){
+    let streak = history[history.length - 1] >= habitData.goal ? 1 : 0;
+    for(let i = history.length - 2; i >= 0; i--){
         if(history[i] >= habitData.goal){
             streak++;
         } else {
