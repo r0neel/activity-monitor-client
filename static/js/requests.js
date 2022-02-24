@@ -91,18 +91,20 @@ function newHabit(uid, {habit, goal, unit, duration}){
     });
 }
 
-function updateHabit(uid, hid, {amount}){
+function updateHabit(uid, hid, {progress}){
     return new Promise(async (resolve, reject) => {
         try {
             const options = {
                 method: "PATCH",
-                headers: { "Content-Type": "application/json" },
-                headers: new Headers({'Authorization': `Bearer ${localStorage.getItem('token')}`}),
-                body: JSON.stringify({ amount })
+                headers: new Headers({
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    "Content-Type": "application/json"
+                }),
+                body: JSON.stringify({ progress })
             };
             const response = await fetch(`${API_HOST}/users/${uid}/habits/${hid}`, options);
             const json = await response.json();
-            if(!json.amount) throw new Error(json);
+            if(response.status !== 200) throw new Error(json);
             resolve(json);
         } catch (err) {
             reject(err);
@@ -119,7 +121,7 @@ function deleteHabit(uid, hid){
             };
             const response = await fetch(`${API_HOST}/users/${uid}/habits/${hid}`, options);
             if(response.status !== 204) throw new Error("Could not delete habit.");
-            resolve(json);
+            resolve();
         } catch (err) {
             reject(err);
         }

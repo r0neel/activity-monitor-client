@@ -249,11 +249,11 @@ function renderNewHabitForm(){
     goalDurationSelect. classList.add("form-select");
 
     const goalDurationArray = [
-        ["hours", 3600000], 
-        ["days", 86400000], 
-        ["weeks", 604800000], 
-        ["months", 2419200000], 
-        ["years", 31536000000]
+        ["hour", 3600000], 
+        ["day", 86400000], 
+        ["week", 604800000], 
+        ["month", 2419200000], 
+        ["year", 31536000000]
     ];
 
     goalDurationArray.forEach(unit => {
@@ -317,18 +317,14 @@ function renderHabitList(habitData){
 
     // table rows
     habitData.forEach(data => {
-        // to do - calculate stats from habit data
-        let progress = 0;
-        let stringDuration = "days";
-        let progression = (progress / data.goal) * 100;
-
         const row = document.createElement("tr");
+        row.dataset.hid = data._id;
 
         // first three columns
         [
             data.habit, // habit name
-            `${progress} ${data.unit}`, // progress
-            `${data.goal} ${data.unit}/${stringDuration}` // goal
+            `${data.progress} ${data.unit}`, // progress
+            `${data.goal} ${data.unit}/${data.durationAsString}` // goal
         ].forEach((text, i) => {
             const col = document.createElement("td");
 
@@ -354,10 +350,10 @@ function renderHabitList(habitData){
         const progBar = document.createElement("div");
         progBar.classList.add("progress-bar");
         progBar.role = "progressbar";
-        progBar.setAttribute("aria-valuenow", progression);
+        progBar.setAttribute("aria-valuenow", data.progressPercentage);
         progBar.setAttribute("aria-valuemin", 0);
         progBar.setAttribute("aria-valuemax", 100);
-        progBar.style.width = `${progression}%`;
+        progBar.style.width = `${data.progressPercentage}%`;
         progContainer.appendChild(progBar);
 
         tbody.appendChild(row);
@@ -368,12 +364,6 @@ function renderHabitList(habitData){
 
 // render stats for single habit
 function renderHabitInfo(habitData){
-    //to do - calculate stats from data
-    let progress = 0;
-    let stringDuration = "days";
-    let progression = (progress / data.goal) * 100;
-    let streak = 0;
-
     const container = document.createElement("div");
     container.classList.add("card-body");
     container.innerHTML = "<h2>Stats</h2>"; // heading
@@ -381,13 +371,15 @@ function renderHabitInfo(habitData){
     // delete button
     const delBtn = document.createElement("button");
     delBtn.id = "delete-btn";
-    delBtn.classList("btn", "btn-danger");
+    delBtn.classList.add("btn", "btn-danger");
     delBtn.textContent = "Delete";
+    delBtn.dataset.hid = habitData._id;
     container.appendChild(delBtn);
 
     // table
     const table = document.createElement("table");
     const tbody = document.createElement("tbody");
+    table.classList.add("table", "table-striped");
     table.appendChild(tbody);
     container.appendChild(table);
 
@@ -405,18 +397,22 @@ function renderHabitInfo(habitData){
     const progressRow = document.createElement("tr");
     const progressLabelCol = document.createElement("td");
     progressLabelCol.textContent = "Progress";
+    progressLabelCol.classList.add("align-middle");
     progressRow.appendChild(progressLabelCol);
     const progressCol = document.createElement("td");
-    progressCol.textContent = `${progress} ${habitData.unit}`;
+    progressCol.textContent = `${habitData.progress} ${habitData.unit}`;
     progressRow.appendChild(progressCol);
     const progressInput = document.createElement("input");
     progressInput.id = "update-prog-input";
     progressInput.type = "text";
     progressInput.placeholder = "add progress";
+    progressInput.style.width = "0px";
     progressCol.appendChild(progressInput);
     const progressInputButton = document.createElement("button");
+    progressInputButton.id = "update-btn";
     progressInputButton.classList.add("btn", "btn-dark", "btn-sm");
     progressInputButton.textContent = "+";
+    progressInputButton.dataset.hid = habitData._id;
     progressCol.appendChild(progressInputButton);
     tbody.appendChild(progressRow);
 
@@ -426,7 +422,7 @@ function renderHabitInfo(habitData){
     goalLabelCol.textContent = "Goal";
     goalRow.appendChild(goalLabelCol);
     const goalCol = document.createElement("td");
-    goalCol.textContent = `${habitData.goal} ${habitData.unit}/${stringDuration}`;
+    goalCol.textContent = `${habitData.goal} ${habitData.unit}/${habitData.durationAsString}`;
     goalRow.appendChild(goalCol);
     tbody.appendChild(goalRow);
 
@@ -447,10 +443,10 @@ function renderHabitInfo(habitData){
     const progBar = document.createElement("div");
     progBar.classList.add("progress-bar");
     progBar.role = "progressbar";
-    progBar.setAttribute("aria-valuenow", progression);
+    progBar.setAttribute("aria-valuenow", habitData.progressPercentage);
     progBar.setAttribute("aria-valuemin", 0);
     progBar.setAttribute("aria-valuemax", 100);
-    progBar.style.width = `${progression}%`;
+    progBar.style.width = `${habitData.progressPercentage}%`;
     progContainer.appendChild(progBar);
 
     tbody.appendChild(progbarRow);
@@ -458,12 +454,50 @@ function renderHabitInfo(habitData){
     // current streak display row
     const streakRow = document.createElement("tr");
     const streakLabelCol = document.createElement("td");
-    streakLabelCol.textContent = "Goal";
+    streakLabelCol.textContent = "Streak";
     streakRow.appendChild(streakLabelCol);
     const streakCol = document.createElement("td");
-    streakCol.textContent = `${streak} ${stringDuration}`;
+    streakCol.textContent = `${habitData.streak} ${habitData.durationAsString}`;
     streakRow.appendChild(streakCol);
     tbody.appendChild(streakRow);
+
+    // time until reset display row
+    const resetRow = document.createElement("tr");
+    const resetLabelCol = document.createElement("td");
+    resetLabelCol.textContent = "Next reset";
+    resetRow.appendChild(resetLabelCol);
+    const resetCol = document.createElement("td");
+    resetCol.textContent = `${habitData.timeUntilReset}`;
+    resetRow.appendChild(resetCol);
+    tbody.appendChild(resetRow);
+
+    // consistency bar display row
+    const consistencyBarRow = document.createElement("tr");
+    const consistencyBarLabelCol = document.createElement("td");
+    consistencyBarLabelCol.textContent = "Consistency";
+    consistencyBarRow.appendChild(consistencyBarLabelCol);
+
+    const consistencyCol = document.createElement("td");
+    consistencyCol.classList.add("align-middle");
+    consistencyBarRow.appendChild(consistencyCol);
+
+    const consistencyContainer = document.createElement("div");
+    consistencyContainer.classList.add("progress");
+    consistencyCol.appendChild(consistencyContainer);
+
+    habitData.consistency.forEach(segment => {
+        const consistencyBar = document.createElement("div");
+        consistencyBar.classList.add("progress-bar");
+        consistencyBar.role = "progressbar";
+        consistencyBar.setAttribute("aria-valuenow", segment.length);
+        consistencyBar.setAttribute("aria-valuemin", 0);
+        consistencyBar.setAttribute("aria-valuemax", 100);
+        consistencyBar.style.width = `${segment.length}%`;
+        consistencyBar.style.backgroundColor = segment.color;
+        consistencyContainer.appendChild(consistencyBar);
+    });
+
+    tbody.appendChild(consistencyBarRow);
 
     return container;
 }

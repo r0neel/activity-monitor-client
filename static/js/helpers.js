@@ -15,6 +15,7 @@ function showDashboard(){
 }
 
 function showHabits(habitData){
+    habitData = habitData.map(habitDataWrapper);
     const newHabitList = renderHabitList(habitData);
     const habitList = document.querySelector("#habit-list");
     habitList.replaceWith(newHabitList);
@@ -22,6 +23,7 @@ function showHabits(habitData){
 }
 
 function showHabitInfo(habitData){
+    habitData = habitDataWrapper(habitData);
     const newInfo = renderHabitInfo(habitData);
     const cardBody = document.querySelector(".card-body");
     cardBody.replaceChildren(newInfo);
@@ -93,11 +95,104 @@ function navLinkEvent(page){
     }
 }
 
+function toggleUpdateInput(){
+    const input = document.querySelector("#update-prog-input");
+    input.value = "";
+    if(input.style.width === "0px") {
+        input.style.width = "125px";
+        input.focus();
+    } else {
+        input.style.width = "0px";
+    }
+}
+
+function habitDataWrapper(habitData){
+    const progress = calculateProgress(habitData);
+    return {
+        ...habitData,
+        durationAsString: durationToString(habitData.duration),
+        streak: calculateStreak(habitData),
+        progress,
+        progressPercentage: (progress / habitData.goal) * 100,
+        timeUntilReset: millisecondsToString(calculateReset(habitData)),
+        consistency: consistencyBars(habitData)
+    };
+}
+
+function calculateHistoryTotals(habitData){
+    const totalTotals = Math.ceil((Date.now() - habitData.creationDate) / habitData.duration);
+    let history = new Array(totalTotals).fill(0);
+    habitData.history.forEach(entry => {
+        const index = Math.floor((entry.time - habitData.creationDate) / habitData.duration);
+        history[index] += entry.amount;
+    });
+    return history;
+}
+
+function calculateStreak(habitData){
+    let history = calculateHistoryTotals(habitData);
+    let streak = 0;
+    for(let i = history.length - 1; i >= 0; i--){
+        if(history[i] >= habitData.goal){
+            streak++;
+        } else {
+            return streak;
+        }
+    }
+    return streak;
+}
+
+function consistencyBars(habitData){
+    let history = calculateHistoryTotals(habitData);
+    let unitPercentage = 100 / history.length;
+    return history.map(entry => ({
+        length: unitPercentage,
+        color: entry >= habitData.goal ? "#0d6efd" : "#00000000"
+    }));
+}
+
+function calculateProgress(habitData){
+    let history = calculateHistoryTotals(habitData);
+    return history[history.length - 1];
+}
+
+function durationToString(time){
+    const durations = [
+        ["hour", 3600000], 
+        ["day", 86400000], 
+        ["week", 604800000], 
+        ["month", 2419200000], 
+        ["year", 31536000000]
+    ];
+    let stringDuration = durations.find(d => d[1] === time);
+    if(!stringDuration) throw new Error("Invalid goal duration.");
+    return stringDuration[0];
+}
+
+function calculateReset(habitData){
+    const now = Date.now();
+    let interval = habitData.creationDate;
+    while(now - interval >= 0) interval += habitData.duration;
+    return interval - now;
+}
+
+function millisecondsToString(t){
+    t = Math.trunc(t / 6e4);
+    let minutes = t % 60;
+    let hours = Math.trunc(t % (60 * 24) / 60);
+    let days = Math.trunc(t / (60 * 24));
+    let string = "";
+    if(days) string += `${days} day${days === 1 ? "" : "s"} `;
+    if(hours) string += `${hours} hour${hours === 1 ? "" : "s"} `;
+    string += `${minutes} minute${minutes === 1 ? "" : "s"} `;
+    return string.trim();
+}
+
 const testingExports = {
     showForm, isLoggedIn
 };
 
 module.exports = {
-    showLoginForm, showRegisterForm, showNewHabitForm, showHabits, showHabitInfo, showHome, updateNavigation, decodeToken, navLinkEvent, showDashboard, 
+    showLoginForm, showRegisterForm, showNewHabitForm, showHabits, showHabitInfo, showHome, updateNavigation, decodeToken, navLinkEvent, showDashboard, toggleUpdateInput, 
     ...testingExports
 };

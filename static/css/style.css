@@ -1,10 +1,12 @@
+<<<<<<< HEAD
+=======
 body{
     background-color: #f6f6f6;
     font-family: 'Inter', sans-serif;
 }
 
 article{
-    padding: 3% 27%;
+    padding: 3%;
 }
 
 #trackerCard {
@@ -82,9 +84,9 @@ nav {
 #update-prog-input {
     border: none;
     padding: 3px;
-    padding-right: 5px;
-    width: 0;
+    margin: 0 5px;
     text-align: right;
+    transition: all 0.2s;
 }
 
 #update-prog-input:focus {
@@ -104,3 +106,10 @@ nav {
     font-size: 60px;
     font-weight: 700;
 }
+
+@media screen and (min-width: 768px){
+    article{
+        padding: 3% 27%;
+    }
+}
+>>>>>>> staging
